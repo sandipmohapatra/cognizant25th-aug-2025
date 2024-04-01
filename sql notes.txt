@@ -213,6 +213,19 @@ insert into cognizantemployee values(101,'sandip','bangalore',15500);
 
 select * from cognizantemployee;
 --------------------------------------------------------------------------------------------
+create table cognizantemployee (empno number primary key,empname varchar2(30) not null,address varchar2(30) unique,
+salary number check (salary >=15000));
+
+select * from cognizantemployee
+
+insert into cognizantemployee values(103,'Sunil','Pune',71000);
+
+create table project (empno number references cognizantemployee, projects varchar2(30),loc varchar2(30));
+
+insert into project values(103,'Nike','Bagmani');
+
+select * from project;
+-------------------------------------------------------------------------
 create table mphasis183
 (empno number primary key,
 name varchar2(30) not null,
