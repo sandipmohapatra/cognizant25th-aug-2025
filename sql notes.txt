@@ -1,4 +1,42 @@
-             Sql :- structure query language
+wap to create a student table
+
+rollno,name,address
+
+add column phy,chem,bio,maths
+
+find total and average
+------------------------------------------------------------------------------
+
+SQL
+
+Subqueries
+
+Group by with having and order by
+
+date functions - add_months, next_day, last_day, to_char and to_date - Ex display experience in years, months etc
+
+identifying duplicate records
+
+hierarchical queries - LEVEL, CONNECT BY clauses
+
+rank and dense rank - Ex display to three earners of EMP table
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+PLSQL
+
+cursor - parameterized and ref cursor
+
+package with functions and procedures - calling the subprograms outside
+
+bulk collect - SELECT INTO, FETCH INTO, RETURNING INTO
+---------------------------------------------------------------------------------------------------------------------------------------
+https://github.com/sandipmohapatra/cognizant2023
+
+--------------------------------------------------------------------------------------------------------------------------------------    
+
+
+        Sql :- structure query language
 ----------------------------------------------
 Data types:-
 ----------------------
@@ -35,7 +73,7 @@ select empno,name,salary-1000 as salaryReduction from mphasis183;
 select empno,name,salary/30 as perDaySalary from mphasis183;
 
 select empno,name,salary*12 as AnualSalary from mphasis183;
------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
 2)comparison operator :- =,>=,<= ,>,<,!=(not equal to)
 select * from mphasis183 where salary=23000;
 select * from mphasis183 where salary>=23000;
@@ -127,6 +165,14 @@ They are temporary.if we rollback it will come to the previous state.
 5)TCL (Transaction control language)  :- commit,rollback ,savepoint. 
 
 --------------------------------------------------------------------------------------------------
+conn system/1234;
+create user sandip identified by niit;
+grant dba to sandip;
+revoke dba from sandip;
+--------------------------------------------
+conn sandip/niit;
+--------------------------------------------
+
 
 delete :- it will delete according to your requirement.(it will display all the data except the deleted data)
 
@@ -159,6 +205,14 @@ constraints
 
 5)foreign key :- you can link a table column with another table column which is having primary key.
 ------------------------------------------------------------
+create table cognizantemployee
+(empno number primary key,empname varchar2(30) not null,address varchar2(30) unique,
+salary number check (salary >=15000));
+
+insert into cognizantemployee values(101,'sandip','bangalore',15500);
+
+select * from cognizantemployee;
+--------------------------------------------------------------------------------------------
 create table mphasis183
 (empno number primary key,
 name varchar2(30) not null,
