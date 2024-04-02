@@ -17,7 +17,7 @@ k:=adds(10,20);
 dbms_output.put_line('result:'||k);
 end;
 ------------------------------------------------------------------------------------
-create or replace function emp_designat(salary number) return varchar is
+create or replace function emp_designat(salary number) return varchar2 is
 begin
 if(salary<=5000) then
 return 'clerk';
