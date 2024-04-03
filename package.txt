@@ -1,0 +1,35 @@
+package :-
+A group of function and procedure is called a package.it has 2 parts
+1)package specification
+2)package body
+
+create or replace package math is
+function add_num(i number,j number)return number;
+function sub_num(i number,j number)return number;
+function mul_num(i number,j number)return number;
+function div_num(i number,j number)return number;
+end math;
+
+create or replace package body math is
+function add_num(i number, j number)return number is
+begin
+return i+j;
+end;
+function mul_num(i number, j number)return number is
+begin
+return i*j;
+end;
+function div_num(i number, j number)return number is
+begin
+return i/j;
+end;
+function sub_num(i number, j number)return number is
+begin
+return i-j;
+end;
+end math;
+
+
+-------------
+1)select math.add_num(10,20),math.sub_num(20,10),math.mul_num(20,10),math.div_num(20,10) from dual;
+
