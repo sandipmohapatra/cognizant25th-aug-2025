@@ -1,0 +1,15 @@
+partitions:-
+
+A table is by default stored into a physical unit called segment which is allocated inside a file called tablespace.
+if a table consists of very huge amount of data storing the complete table only in one file can prove to be risky and hence to reduce the risk of data corruption one can store the rows of the table in different segments which are allocated on different tablespaces which are created on different drives,in this kind of storage if any one of the file is corrupted only some part of the table is lost but the other rows are not effected.
+
+table space:-
+create tablespace t1 datafile 'c:\a.dbf' size 1m;
+create tablespace t2 datafile 'd:\b.dbf' size 1m;
+create tablespace t3 datafile 'e:\c.dbf' size 1m;
+
+
+create table bank(accno number,name varchar2(10),balance number) partition by range(balance)
+(partition p1 values less than(10000)tablespace t1,
+ partition p2 values less than(20000)tablespace t2,
+partition p3 values less than(100000)tablespace t3);
