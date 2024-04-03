@@ -1,0 +1,144 @@
+Handling Exceptions
+---------------------------------------------------------------------------------------------------
+Trapping Pre-defined Oracle Server Errors
+
+1. NO_DATA_FOUND
+2. TOO_MANY_ROWS
+3. INVALID_CURSOR
+4. ZERO_DIVIDE
+5. DUP_VAL_ON_INDEX
+
+Non-Predefined Exceptions
+
+PRAGMA EXCEPTION_INIT: tells the compiler to associate an exception name with an Oracle error number.
+
+
+DECLARE
+w_eno number:=1002;
+e_emps_remaining EXCEPTION;
+PRAGMA EXCEPTION_INIT(e_emps_remaining,-2292);
+BEGIN
+delete from wiproemp where empid=w_eno;
+EXCEPTION
+WHEN e_emps_remaining THEN
+dbms_output.put_line('Cannot remove employee' || to_char(w_eno) || ' is exists');
+END;
+
+
+Functions for Trapping Exceptions
+
+1. SQLCODE: returns the numeric value for the error code
+2. SQLERRM: returns the message associated with the error number
+
+
+User Defined Exceptions
+
+1.
+DECLARE
+e_no number:=1030;
+e_invalid EXCEPTION;
+BEGIN
+update wiproemp set jobtitle='CentreDirector' where empid=e_no;
+IF SQL%NOTFOUND THEN
+RAISE e_invalid;
+END IF;
+EXCEPTION
+WHEN e_invalid THEN
+dbms_output.put_line('No such employee');
+END;
+
+
+Using: RAISE_APPLICATION_ERROR
+used to issue user defined error messages from stored subprograms. 
+Syntax:
+ RAISE_APPLICATION_ERROR(errornumber,message);                                                                                                                                                                                                                                                                                                            
+
+
+DECLARE
+e_no number:=1030;
+BEGIN
+delete from wiproemp where empid=e_no;
+IF SQL%NOTFOUND THEN
+RAISE_APPLICATION_ERROR(-20202,'This is not a valid employee' );
+END IF;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+RAISE_APPLICATION_ERROR(-20201, 'Employee does not exist');
+END;
+
+
+
+create table mylogtable(code number,message varchar(30),info varchar(20));
+
+
+
+DECLARE
+e_missing EXCEPTION;
+PRAGMA EXCEPTION_INIT(e_missing,-1400);
+BEGIN
+insert into wiproemp(empid,empname,jobtitle)values(null,null,null);
+EXCEPTION
+WHEN e_missing THEN
+insert into mylogtable(info)values('ORACLE -1400 occurs');
+END;
+-----------------------------------------------------------------------------------------------
+
+
+
+1. Zero Divide Error
+
+DECLARE
+n number;
+BEGIN
+n:=10/0;
+dbms_output.put_line(n);
+EXCEPTION
+WHEN ZERO_DIVIDE THEN
+dbms_output.put_line('Zero Divide Error');
+END;
+
+
+
+
+
+2. NO_DATA_FOUND
+DECLARE
+eno number:=1030;
+ename varchar(30);
+BEGIN
+select empname into ename from mphasisemp where empid=eno;
+dbms_output.put_line('Empname = ' || ename);
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+dbms_output.put_line('Employee does not exist');
+END;
+
+
+
+
+
+
+3. DUP_VAL_ON_INDEX
+
+BEGIN
+insert into mphasisemp(empid,empname,jobtitle)values(1002,'anil','Techsupport');
+dbms_output.put_line('1 row created');
+EXCEPTION
+WHEN DUP_VAL_ON_INDEX THEN
+dbms_output.put_line('Primary key attribute does not contain duplicate values');
+END;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
