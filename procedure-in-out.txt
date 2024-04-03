@@ -1,0 +1,180 @@
+Parameter:
+The parameter is a variable or placeholder of any valid PL/SQL datatype through which the PL/SQL subprogram exchange the values with the main program. 
+
+Based on their purpose parameters are classified as
+
+IN Parameter
+OUT Parameter
+IN OUT Parameter
+--------------------------------------------------------------
+IN Parameter:
+This parameter is used for giving input to the programs.
+It is a read-only variable inside the programs. 
+for example, it could be the arithmetic expression like '5*8' or 'a/b' where 'a' and 'b' are variables.
+By default, the parameters are of IN type.
+---------------------------------------------------------------------
+OUT Parameter:
+This parameter is used for getting output from the programs.
+It is a read-write variable inside the programs. 
+In the calling statement, these parameters should always be a variable to hold the value from the current programs.
+-----------------------------------------------------------------------
+IN OUT Parameter:
+This parameter is used for both giving input and for getting output from the programs.
+It is a read-write variable inside the programs. 
+In the calling statement, these parameters should always be a variable to hold the value from the programs.
+--------------------------------------------------Procedure-----------------------
+CREATE OR REPLACE PROCEDURE welcome_msg (p_name IN VARCHAR2) 
+IS
+BEGIN
+dbms_output.put_line ('Welcome '|| p_name);
+END;
+----------------------------------------------------------
+begin
+welcome_msg ('Mphasis Students');
+end;
+-------------------------------------------------------------Function---------------------
+CREATE OR REPLACE FUNCTION welcome_msg_func ( p_name IN VARCHAR2) RETURN VARCHAR2
+IS
+BEGIN
+RETURN ('Welcome '|| p_name);
+END;
+-----------------------------------------------------------------------------------------
+DECLARE
+lv_msg VARCHAR2(250);
+BEGIN
+lv_msg := welcome_msg_func ('sandip');
+dbms_output.put_line(lv_msg);
+END;
+-----------------------------------------------------------------------------------------
+SELECT welcome_msg_func('sandip') FROM DUAL;
+------------------------------------Pocedure (IN/OUT)------------------------------------
+CREATE OR REPLACE PROCEDURE GET_EMP_NAME (i_empno IN mphasisemp.empid%TYPE,o_ename OUT mphasisemp.name%TYPE)
+IS
+CURSOR c_ename (p_empno emp.empno%TYPE)
+IS
+SELECT name FROM mphasisemp WHERE empid = p_empno;
+BEGIN
+OPEN c_ename (i_empno);
+FETCH c_ename INTO o_ename;
+CLOSE c_ename;
+END get_emp_name;
+----------------------------------------------------------------------------------------------------
+DECLARE
+v_name mphasisemp.name%TYPE;
+BEGIN
+get_emp_name (101, v_name);
+DBMS_OUTPUT.put_line (v_name);
+END;
+--------------------------------------------Procedure----------------------------
+DECLARE 
+   a number; 
+   b number; 
+   c number;
+PROCEDURE findMin(x IN number, y IN number, z OUT number) IS 
+BEGIN 
+   IF x < y THEN 
+      z:= x; 
+   ELSE 
+      z:= y; 
+   END IF; 
+END;   
+BEGIN 
+   a:= 23; 
+   b:= 45; 
+   findMin(a, b, c); 
+   dbms_output.put_line(' Minimum of (23, 45) : ' || c); 
+END; 
+/
+------------------------------------------------Procedure---------------------------------------------
+DECLARE 
+   a number; 
+PROCEDURE squareNum(x IN OUT number) IS 
+BEGIN 
+  x := x * x; 
+END;
+BEGIN 
+   a:= 23; 
+   squareNum(a); 
+   dbms_output.put_line(' Square of (23): ' || a); 
+END; 
+/
+-----------------------------------------------function--------------------------------------
+CREATE OR REPLACE FUNCTION totalCustomers 
+RETURN number IS 
+   total number(2) := 0; 
+BEGIN 
+   SELECT count(*) into total FROM mphasisemp; 
+    
+   RETURN total; 
+END; 
+/ 
+------------------------------------------------------------------------
+DECLARE 
+   c number(2); 
+BEGIN 
+   c := totalCustomers(); 
+   dbms_output.put_line('Total no. of Customers: ' || c); 
+END; 
+/
+----------------------------------------------Function----------------------------------------
+DECLARE 
+   a number; 
+   b number; 
+   c number; 
+FUNCTION findMax(x IN number, y IN number)  
+RETURN number 
+IS 
+    z number; 
+BEGIN 
+   IF x > y THEN 
+      z:= x; 
+   ELSE 
+      z:= y; 
+   END IF;  
+   RETURN z; 
+END; 
+BEGIN 
+   a:= 23; 
+   b:= 45;  
+   c := findMax(a, b); 
+   dbms_output.put_line(' Maximum of (23,45): ' || c); 
+END; 
+/ 
+--------------------------------------------Function------------------------------
+DECLARE 
+   num number; 
+   factorial number;  
+   
+FUNCTION fact(x number) 
+RETURN number  
+IS 
+   f number; 
+BEGIN 
+   IF x=0 THEN 
+      f := 1; 
+   ELSE 
+      f := x * fact(x-1); 
+   END IF; 
+RETURN f; 
+END;  
+BEGIN 
+   num:= 6; 
+   factorial := fact(num); 
+   dbms_output.put_line(' Factorial '|| num || ' is ' || factorial); 
+END; 
+/
+------------------------------------Cursor------------------------------------------
+DECLARE  
+   total_rows number(2); 
+BEGIN 
+   UPDATE customers 
+   SET salary = salary + 500; 
+   IF sql%notfound THEN 
+      dbms_output.put_line('no customers selected'); 
+   ELSIF sql%found THEN 
+      total_rows := sql%rowcount;
+      dbms_output.put_line( total_rows || ' customers selected '); 
+   END IF;  
+END; 
+/      
+-------------------------------------------------------------------------------------------
