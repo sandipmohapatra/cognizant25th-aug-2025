@@ -14,7 +14,7 @@ DECLARE
 e_no number:=1030;
 e_invalid EXCEPTION;
 BEGIN
-update wiproemp set jobtitle='CentreDirector' where empid=e_no;
+update cognizantemployee set salary=75000 where empid=e_no;
 IF SQL%NOTFOUND THEN
 RAISE e_invalid;
 END IF;
@@ -22,7 +22,7 @@ EXCEPTION
 WHEN e_invalid THEN
 dbms_output.put_line('No such employee');
 END;
-
+----------------------------------------------------------------------------------------------------
 
 Using: RAISE_APPLICATION_ERROR
 used to issue user defined error messages from stored subprograms. 
@@ -31,9 +31,9 @@ Syntax:
 
 
 DECLARE
-e_no number:=1030;
+e_no number:=105;
 BEGIN
-delete from wiproemp where empid=e_no;
+delete from cognizantemplyee where empid=e_no;
 IF SQL%NOTFOUND THEN
 RAISE_APPLICATION_ERROR(-20202,'This is not a valid employee' );
 END IF;
