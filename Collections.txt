@@ -1,0 +1,134 @@
+In PL/SQL, a collection is a data structure that can hold multiple elements of the same data type. 
+PL/SQL supports several types of collections, including 
+associative arrays (also known as index-by tables), 
+nested tables, and 
+VARRAYs (variable-size arrays).
+
+Associative Arrays (Index-By Tables):
+
+Associative arrays are collections that use a key-value pair structure, where elements are accessed using unique keys.
+They are declared using the TYPE statement and are indexed by INTEGER or a string.
+-------------------------------------------------------------------------------------------------------------
+DECLARE
+  TYPE phone_book IS TABLE OF VARCHAR2(50) INDEX BY VARCHAR2(30);
+  my_contacts phone_book;
+BEGIN
+  my_contacts('Sandip') := '9777237288';
+  my_contacts('Bobby') := '9876543210';
+  -- Accessing elements
+  DBMS_OUTPUT.PUT_LINE('Bobby''s number is: ' || my_contacts('Bobby'));
+END;
+------------------------------------------------------------------------------------------------------------------------------
+Nested Tables:
+
+Nested tables are one-dimensional arrays with no pre-defined size, similar to arrays in other programming languages.
+They are declared using the TYPE statement, and their size can be dynamically adjusted.
+---------------------------------------------------------------------------------------------------------------------------
+DECLARE
+  TYPE name_list IS TABLE OF VARCHAR2(50);
+  my_names name_list := name_list('Alice', 'Bob', 'Charlie');
+BEGIN
+  -- Iterating through elements
+  FOR i IN 1..my_names.COUNT LOOP
+    DBMS_OUTPUT.PUT_LINE('Name: ' || my_names(i));
+  END LOOP;
+END;
+-----------------------------------------------------------------------------------------------------------
+VARRAYs (Variable-Size Arrays):
+
+VARRAYs are fixed-size arrays that can hold a maximum number of elements defined at declaration.
+They are declared using the TYPE statement with a specified maximum size.
+-------------------------------------------------------------------------------------------------------------------------
+DECLARE
+  TYPE marks_array IS VARRAY(3) OF NUMBER;
+  student_marks marks_array := marks_array(90, 85, 95);
+BEGIN
+  -- Accessing elements
+  DBMS_OUTPUT.PUT_LINE('First mark: ' || student_marks(1));
+END;
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+A collection is an ordered group of elements having the same data type. 
+Each element is identified by a unique subscript that represents its position in the collection.
+
+PL/SQL provides three collection types −
+
+Index-by tables or Associative array
+Nested table
+Variable-size array or Varray
+-----------------------------------------------------------------------------------------------------------------------------------------------
+An index-by table (also called an associative array) is a set of key-value pairs. Each key is unique and is used to locate the corresponding value. The key can be either an integer or a string.
+	 Here, we are creating an index-by table named table_name, the keys of which will be of the subscript_type and associated values will be of the element_type
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DECLARE 
+   TYPE salary IS TABLE OF NUMBER INDEX BY VARCHAR2(20); 
+   salary_list salary; 
+   name   VARCHAR2(20); 
+BEGIN 
+   -- adding elements to the table 
+   salary_list('Rajnish') := 62000; 
+   salary_list('Minakshi') := 75000; 
+   salary_list('Martin') := 100000; 
+   salary_list('James') := 78000;  
+   
+   -- printing the table 
+   name := salary_list.FIRST; 
+   WHILE name IS NOT null LOOP 
+      dbms_output.put_line 
+      ('Salary of ' || name || ' is ' || TO_CHAR(salary_list(name))); 
+      name := salary_list.NEXT(name); 
+   END LOOP; 
+END; 
+
+----------------------------------------------------------------------------------------------------
+DECLARE 
+   CURSOR c_customers is 
+      select name from customers; 
+
+   TYPE c_list IS TABLE of customers.Name%type INDEX BY binary_integer; 
+   name_list c_list; 
+   counter integer :=0; 
+BEGIN 
+   FOR n IN c_customers LOOP 
+      counter := counter +1; 
+      name_list(counter) := n.name; 
+      dbms_output.put_line('Customer('||counter||'):'||name_list(counter)); 
+   END LOOP; 
+END; 
+---------------------------------------------------------------------------------------------------------------------
+DECLARE 
+   TYPE names_table IS TABLE OF VARCHAR2(10); 
+   TYPE grades IS TABLE OF INTEGER;  
+   names names_table; 
+   marks grades; 
+   total integer; 
+BEGIN 
+   names := names_table('Kavita', 'Pritam', 'Ayan', 'Rishav', 'Aziz'); 
+   marks:= grades(98, 97, 78, 87, 92); 
+   total := names.count; 
+   dbms_output.put_line('Total '|| total || ' Students'); 
+   FOR i IN 1 .. total LOOP 
+      dbms_output.put_line('Student:'||names(i)||', Marks:' || marks(i)); 
+   end loop; 
+END; 
+----------------------------------------------------------------------------------------------------------------------------------
+DECLARE 
+   CURSOR c_customers is  
+      SELECT  name FROM customers;  
+   TYPE c_list IS TABLE of customers.Name%type; 
+   name_list c_list := c_list(); 
+   counter integer :=0; 
+BEGIN 
+   FOR n IN c_customers LOOP 
+      counter := counter +1; 
+      name_list.extend; 
+      name_list(counter)  := n.name; 
+      dbms_output.put_line('Customer('||counter||'):'||name_list(counter)); 
+   END LOOP; 
+END; 
+-------------------------------------------------------------------------------------------------------------------------------------------
