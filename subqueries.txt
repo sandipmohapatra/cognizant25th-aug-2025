@@ -1,0 +1,38 @@
+subquery :-
+------------------
+a subquery is a select statement that is embedded in a cluse of another select statement.
+
+we can place the subquery in a number of sql clauses.
+
+1)having 2)where 3)from we use operater (>,=>,<=,<,=)
+
+
+They are 2 types:-
+1)single row subquery
+
+2)multiple row subquery
+
+we use operator like in,any,all
+
+
+example:-
+1) select ename from emp where sal>(select sal from emp where name='amit');
+
+
+2)select * from emp where sal=(select sal from(select distinct sal from emp order by sal desc)where rownum<=3
+minus
+select sal from(select distinct sal from emp order by sal desc)where rownum<=2);
+
+
+10000
+8000
+7000
+-------------------------
+10000
+8000
+------------
+7000
+
+
+
+

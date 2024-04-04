@@ -2,14 +2,9 @@
 -----------------
 A subquery is a select statement that is embedded in a cluse of another select statement.
 
-
-
 example:-
 1) select ename from emp where sal>(select sal from emp where name='amit');
-
-
-
----------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------
 select empno,ename,sal from emp where sal = any(1500,3000);
 select empno,ename,sal from emp where sal>1500 or sal>3000;
 select empno,ename,sal from emp where sal >1600 AND sal<3000;
@@ -55,17 +50,5 @@ DELETE FROM CUSTOMERS
    WHERE AGE IN (SELECT AGE FROM CUSTOMERS WHERE AGE >= 27 );
 
 ---------------------------------------------------------
--------------------------------------------------------------------------------------
-create table assessment(studentid int,marks char(20));
-
-insert into assessment values(101,87);
-
-SELECT STUDENTID,CASE WHEN MARKS < 50 THEN 'FAIL' ELSE Marks END FROM ASSESSMENT
-
---------------------------------------------------------------------
-SELECT STUDENTID,marks,CASE WHEN MARKS < 50 THEN 'FAIL' 
-WHEN MARKS > 50 THEN 'PASS'
-ELSE Marks END FROM ASSESSMENT
----------------------------------------------------------------------------------------
 
 
