@@ -1,0 +1,57 @@
+Bulk collect - SELECT INTO, FETCH INTO, RETURNING INTO
+------------------------------------------------------------------------------------------------------------------------------------------
+In Oracle PL/SQL, the BULK COLLECT feature allows you to fetch multiple rows of data at once into collections, rather than fetching them one by one. 
+This can significantly improve the performance of your PL/SQL code when dealing with large datasets. 
+There are several ways to utilize BULK COLLECT:
+---------------------------------------------------------------------------------------------------------------------------------------
+SELECT INTO with BULK COLLECT:
+
+You can use BULK COLLECT with a SELECT INTO statement to fetch multiple rows into a collection. 
+-----------------------------------------------------------------------------------------------------------------------------------
+select * from employees
+
+create table employees (employee_id number,first_name varchar2(30),last_name varchar2(30),address varchar2(30),hire_date date)
+
+insert into employees values(103,'anil','M','Bangalore','01-Jul-2022');
+-------------------------------------------------------------------------------------------------------------------
+DECLARE
+    TYPE emp_name_list IS TABLE OF employees.last_name%TYPE;
+    l_names emp_name_list;
+BEGIN
+    SELECT last_name BULK COLLECT INTO l_names FROM employees;
+    
+    -- Now l_names contains all the last names of employees
+  
+END;
+
+-----------------------------------------------------------------------------------------------------
+FETCH INTO with BULK COLLECT:
+You can also use BULK COLLECT with a cursor and FETCH INTO statement to fetch multiple rows into a collection. 
+-------------------------------------------------------------------------------------------------------------
+
+DECLARE
+    CURSOR c_emp IS SELECT last_name FROM employees;
+    TYPE emp_name_list IS TABLE OF c_emp%ROWTYPE;
+    l_emp_names emp_name_list;
+BEGIN
+    OPEN c_emp;
+    FETCH c_emp BULK COLLECT INTO l_emp_names;
+    CLOSE c_emp;
+    
+    -- Now l_emp_names contains all the last names of employees
+   
+END;
+-----------------------------------------------------------------------------------------------------------------------------
+RETURNING INTO with BULK COLLECT:
+You can use BULK COLLECT with a DML statement (like INSERT, UPDATE, DELETE) that includes a RETURNING INTO clause to fetch multiple affected rows into a collection. 
+-----------------------------------------------------------------------------------
+DECLARE
+    TYPE emp_id_list IS TABLE OF employees.employee_id%TYPE;
+    l_emp_ids emp_id_list;
+BEGIN
+    DELETE FROM employees WHERE hire_date < SYSDATE - 365 RETURNING employee_id BULK COLLECT INTO l_emp_ids;
+    
+    -- Now l_emp_ids contains the employee IDs of deleted employees
+  END;
+
+---------------------------------------------------------------------------------------
