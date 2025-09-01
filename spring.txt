@@ -1,0 +1,458 @@
+Spring :-In spring we will have modules
+1)core
+2)jdbc
+3)MVC:- Model view controller
+4)AOP:- Exception Handling
+Boot :- 1)core,2)jdbc,jpa,3)Theamleaf spring MVC,4)AOP
+----------------------------------------------------------------------------------
+Spring Rest:-Postman (test the Rest Application)
+node.js
+---------------------------------------
+Front end as angular17
+----------------------------------------
+https://nodejs.org/en/download/
+----------------------------------------------------------------------------------
+Spring Framework was developed by Rod Johnson in 2003. Spring framework makes the easy development of JavaEE application.
+
+Spring is a lightweight framework. It is a framework of frameworks because it provides support to various frameworks such as Struts, Hibernate,  EJB, JSF etc. 
+The Spring framework comprises several modules such as IOC, AOP, DAO, ORM, WEB MVC etc.
+
+Example:- of Lightweight and Heavy weight
+1)awt is heavy weight as it depend on OS
+2)swing is light weight as it only depend on JDK
+3)EJB is heavy weight as it depends on application server.
+4)spring is light weight as it depends on spring jar files + JDK
+Spring is build on 2 principles 1)Runtime Polymorphism 2)Has-A relationship
+Spring says instead of Inheritance use Has-A relationship. 
+
+function overloading 
+-----------------------------------
+int sum(int a,int b)
+float sum(float a,float b);
+
+Advantages of Spring Framework
+There are many advantages of Spring Framework. They are as follows:
+
+1) Predefined Templates
+
+Spring framework provides templates for JDBC, Hibernate, JPA etc. technologies. So there is no need to write too much code. It hides the basic steps of these technologies.
+ example of JdbcTemplate, you don't need to write the code for exception handling, creating connection, creating statement, committing transaction, closing connection etc. You need to write the code of executing query only. Thus, it save a lot of JDBC code.
+________________________________________
+2) Loose Coupling
+The Spring applications are loosely coupled because of dependency injection.
+________________________________________
+3) Easy to test
+The Dependency Injection makes easier to test the application. The EJB or Struts application require server to run the application but Spring framework doesn't require server.
+________________________________________
+4) Lightweight
+Spring framework is lightweight because of its POJO implementation. The Spring Framework doesn't force the programmer to inherit any class. 
+________________________________________
+5) Fast Development
+The Dependency Injection feature of Spring Framework and it support to various frameworks makes the easy development of JavaEE application.
+________________________________________
+
+
+
+Spring IOC:-
+-----------------------------------------------------
+We have 3 container -
+core-(BeanFactory)-Interface and implement class is (XMLBeanFactory) 
+J2EE-(ApplicationContext)-Interface and implement class is (ClassPathXmlApplicationContext)
+MVC-(WebApplicationContext)-Interface and implement class is WebApplicationContextUtil
+
+Work of container :-
+-----------------------------------
+1)Read  .xml file
+2)create Instances
+3)manage life cycle methods
+
+Dependency Injection
+----------------------------------
+passing data to a class at runtime.
+They are 2 types :- 1)setter methods 2)parameterized Constructor
+
+
+For spring program we have 3 files to be created minimum.
+1)pojo class
+2)xml files
+3)Driver class :- main method class in spring.
+
+------------------------------
+example 1:-
+---------------------- 
+1)pojo class :- 
+Test.java
+------------
+class Test
+{
+public void hello()
+{
+S.O.P("hello world");
+}
+}
+---------------------------------------
+2)spring.xml
+dtd/xsd
+<beans>
+<bean class="Test" id="t">
+</bean>
+</beans>
+------------------------------------
+3)client.java
+class client
+{
+public static void main(String args[])
+{
+//read the .xml file from the given path
+Resource r=new classpathResource("spring.xml");
+BeanFactory factory=new XmlBeanFactory(r); <---to read the XML file.
+Test t1=(Test)factory.getBean("t");
+t1.hello();
+}}
+----------------------------------------------------------------
+Example 2:- setter Injection
+-------------------------
+Test.java
+------------
+class Test
+{
+private String name;
+public void setName(String name)  <---setter method
+{
+this.name=name;
+}
+public void hello()
+{
+System.out.println("Hello: "+name); 
+}
+}
+---------------------------------------
+2)spring.xml
+dtd/xsd
+<beans>
+<bean class="Test" id="t">
+<property name="name" value="ABC"/>
+or
+<property name="name">
+<value>ABC<value>
+</property>
+</bean>
+<beans>
+------------------------------------
+3)client.java
+class client
+{
+public static void main(String args[])
+{
+//read the .xml file from the given path
+Resource r=new classpathResource("spring.xml");
+BeanFactory factory=new XmlBeanFactory(r);
+Test t1=(Test)factory.getBean("t");
+t1.hello();
+}}
+----------------------------------------------------------------
+Example 3:- setter Injection(List/Set/Map)
+----------------------------------------------------------------
+Test.java
+------------
+class Test
+{
+List fruits;
+Set Cricketers;
+Map Countrycap; 
+getter/setter
+}
+---------------------------------------
+2)spring.xml
+dtd/xsd
+<beans>
+<bean class="Test" id="t">
+<property name="fruit">
+<list>
+<value>apple</value>
+ <value>orange</value>
+ <value>grapes</value>
+</list>
+</property>
+
+<property name="criketer">
+<Set>
+<value>xyz</value>
+ <value>pqr</value>
+ <value>abc</value>
+</Set>
+</property>
+
+<property name="countrycap">
+<Map>
+<entry key="India" value="delhi">
+<entry key="Pakistan" value="XYZ">
+<entry key="Japan" value="PQR">
+</Map>
+</property>
+</bean>
+<beans>
+------------------------------------
+//setter-injection with ref
+-----------------------------------------------
+class Car
+{
+private Engine engine;
+private String carname;
+//setter
+public void putCarout()
+{
+s.o.p("carname "+carname);
+s.o.p("Modelname "+engine.getModelname());
+}}
+
+----------------------------------------
+class Engine
+{
+private String modelname;
+//setter
+//getter
+}
+
+-----------------------------------------
+engine.xml
+-----------------------
+<beans>
+<bean id="e" class="Engine">
+<property name="modelname" value="2016">
+</bean>
+</beans>
+-----------------------------------------
+car.xml
+-----------------------
+<beans>
+<bean id="c" class="Car">
+<property name="Carname" value="Audi"/>
+<property name="Engine" ref="e"/>
+</bean>
+</beans>
+-------------------------------------------
+constructor-Injection
+--------------------------------
+Test.java
+------------------
+class Test
+{
+private String name;
+int age;
+Test(String name)
+{
+this.name=name;
+}
+Test(int age)
+{
+this.age=age;
+}
+Test(String name,int age)
+{
+this.name=name;
+this.age=age;
+}
+ public void printHello()
+{
+s.o.p("hello"+name+age);
+}}
+-------------------------------------------------
+spring.xml
+---------------------------
+<beans>
+<bean id="t" class="test">
+<constructor-arg value="123">
+or
+<value>abc</value>
+</contructor-arg>
+</bean>
+</beans>
+-----------------------------------
+<beans>
+<bean id="t" class="test">
+<constructor-arg value="23" type="int">
+</contructor-arg>
+</bean>
+</beans>
+---------------------------------------------
+<beans>
+<bean id="t" class="test">
+<constructor-arg value="23" type="int">
+<constructor-arg value="abc" type="String">
+</contructor-arg>
+</bean>
+</beans>
+----------------------------------------------------------
+wap to enter employee data using setter injection.
+empid,name,salary,designation.
+--------------------------------------------------------------------
+
+Create a employee class empno,name,email,phoneno
+create a project class projectid,projectname,project manager,location.
+--------------------------------------------------------------------------------------------
+Spring MVC
+--------------------------
+Servlets are single-action controller.
+Spring MVC is known as multi-action.
+1)Input form or view .
+2)DispatcherServlet :- It handles the request and send it to the particular section of the controller.
+There will be multiple sections in the contoller.(web.xml)
+3)It is a controller which has multiple sections
+example:-
+public ModelAndView save()
+{
+return new ModelAndView("save");
+}
+--------------------------------------------------------------
+public ModelAndView update()
+{
+return new ModelAndView("update");
+}
+--------------------------------------------------------------
+public ModelAndView delete()
+{
+return new ModelAndView("delete");
+}
+--------------------------------------------------------------
+4)InternalResourceViewResolver :-which desides which output it has to display.(spring-servlet.xml)
+----------------------------------------------------------------------
+5)output :- These are the output screen.
+-------------------------------------------------------------------
+example 1:-
+------------------------index.jsp----------------------------
+<a href="hello.pqr">Click Here</a>
+-----------------------------------index2.jsp--------------------
+<a href="welcome.pqr">Click This Here</a>
+---------------------------------------------------------------------------
+web.xml
+----------------------
+<servlet>
+<servlet-name>spring</servlet-name>
+<servlet-class>org.springframework.servlet.DispatcherServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+<servlet-name>spring</servlet-name>
+<servlet-class>*.pqr</servlet-class>
+</servlet-mapping>
+
+-----------------------------------------------------------------------------------------
+controller
+--------------------------------
+public class MyController
+{
+@RequestMapping("/hello")
+public ModelAndView sayHello()
+{
+String msg="Hello spring";
+return new ModelAndView("hellopage","message",msg);-----hellopage is a jsp page(hellopage.jsp)
+}
+@RequestMapping("/welcome")
+public ModelAndView sayWelcome()
+{
+String msg1="Hello welcome spring";
+return new ModelAndView("welcomepage","message",msg1);----welcomepage is a jsp page(welcomepage.jsp)
+}}
+----------------------------------------------------------------------
+spring-servlet.xml
+------------------------------
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<property name="prefix" value="/WEB-INF/jsp/"></property>
+	<property name="suffix" value=".jsp"></property>
+	</bean>
+---------------------------------------------------------------
+
+web-app :-index.jsp,index1.jsp
+web-inf:- we have a folder web-inf/.jsp ----welcome.jsp,Hello.jsp
+lib:- all the library files.
+ web.xml,spring-servlet.xml,
+src:-controller
+
+---------------------------------------------------------------------------
+In Controller  we have ModelAndView as the return type in spring MVC.
+The return type will be a JSP
+@RequestMapping("/Hello") :- this is the input url.
+---------------------------------------------------------------------------------------
+create a calculator have add,sub,mul,div and display the output using springmvc.
+---------------------------------------------------------------------------------------------------------
+example-3
+------------------
+<form action="hello" method="post">
+<h1><center>Employee Registration Page</center></h1>
+<table>
+<tr><td>Name:<td><input type=text name=t1 size=20></td></tr>
+<tr><td>Address:<td><input type=text name=t2 size=20></td></tr>
+<tr><td>Email:<td><input type=text name=t3 size=20></td></tr>
+<tr><td>Phone no:<td><input type=text name=t4 size=20></td></tr>
+<tr><td>Date of Join:<td><input type=date name=t5 size=20></td></tr>
+<tr><td>Project Name:<td><input type=text name=t6 size=20></td></tr>
+<tr><td><td><input type=submit value=submit></td></tr>
+</table>
+</form>
+
+<!-- create table maremps123(name varchar2(30),address varchar2(30),email varchar2(30),
+phoneno varchar2(30),doj varchar2(30),projname varchar2(30)) -->
+-------------------------------------------------------------------------------------------------
+package com.javatpoint;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import javax.servlet.http.*;
+import java.sql.*;
+@Controller
+public class HelloWorldController 
+{
+
+	@RequestMapping("/hello") //input 
+	public ModelAndView helloWorld(HttpServletRequest req,HttpServletResponse res)
+	{  
+	
+		String name=req.getParameter("t1");
+		String add=req.getParameter("t2");
+		String email=req.getParameter("t3");
+		String phno=req.getParameter("t4");
+		String doj=req.getParameter("t5");
+		String proj=req.getParameter("t6");
+		try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","System","1234");
+		PreparedStatement st=con.prepareStatement("insert into maremps123 values(?,?,?,?,?,?)");
+		st.setString(1, name);
+		st.setString(2,add);
+		st.setString(3, email);
+		st.setString(4,phno);
+		st.setString(5, doj);
+		st.setString(6,proj);
+		st.execute();
+		}
+		catch(Exception ae)
+		{
+			ae.printStackTrace();
+		}
+		return new ModelAndView("hellopage","message","Row Inserted");
+	}
+		
+	
+	}
+
+-----------------------------------------------------------------------------------------------------
+wap to create 3 more buttons to update,delete,select
+ to it.
+---------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
