@@ -1,0 +1,17 @@
+BootStrap :- It is a combination of css, javascript and html.
+It is used to create responsive pages.
+
+what is a responsive pages?
+You can open a webpage in laptop, mobile phone,(big screen or small screen).The picture/webpage fits the screen.
+
+
+
+what is the use of bootstrap ?
+1)It is used for development of responsive webpages.
+2)It provides design templates for tables, menu bar /navigation bar, different style buttons.
+3)It provides good look and feel.
+4) Bootstrap is a free front-end framework for faster and easier web development.
+5)Bootstrap includes HTML and CSS based design templates for forms, buttons, tables, navigation bar, image and many other, as well as optional JavaScript plugins.
+6)Bootstrap also gives you the ability to easily create responsive designs.
+7)Here we have many builtin classes. we have classes for icons.(graphions).
+--------------------------------------------------------------------------------------------------------------------------------------
