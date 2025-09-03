@@ -1,0 +1,165 @@
+Git :- githhub.com(central),  git(local)
+---------------------------------------------------------------------------
+Git is distributed reposistory.
+-----------------------------------------
+1)central repository
+step to create central Repository
+i)https://github.com
+ii)sign up and sign in
+iii)karthick10oct@yahoo.co.in
+iv)password :-karthick123
+v)user:-karthick2018
+-------------------------------------------
+public :- every one can view it
+private :- it paid version $7 per month
+--------------------------------------------
+vi)submit
+vii)start a project
+----------------------------------
+2)after signin
+give the repository name
+
+---------------------------------------------------------------
+2)local repository
+1) http://git-scm.com/download
+and install...
+-----------------------------------------------------------------------------------------------------
+2)create a folder
+right click on the folder
+select (Git gui here)
+a cmd prompt will open
+-------------------------------------
+3)to link the local repository to remote repository 
+-> git remote add origin "https://github.com/sandipmohapatra/BatchI06"
+
+-------------------------------------------------------------------
+4)to pull the data from remote repository
+----------------------------------------------------------
+->git pull origin master
+-----------------------------------------------------------------------------------
+create files
+vi test.txt
+----------------------------------------------------------------
+5)git status :- tells you which files are added to index and are ready to commit.
+------------------------------------------------------------------------------------------------
+6)git add <filename>:-lets you to add files to your index.
+----------------------------------------------------------------------------------
+7)git commit -m "This is my first file":- it refers to recording snapshots of the repository at a given time.
+committed snapshots will never change unless done explicitly.
+-----------------------------------------------------------------------------------------------------------
+8)create a text file in local then see the status(first.txt)
+----------------------------------------------------------
+9)git add first.txt
+----------------------------------------------
+ 10)again see the status
+-----------------------------------
+$ git config --global user.email "sandipmohapatra.sandipmohapatra123@gmail.com"
+---------------------------------------------------------------------------------------------
+$ git config --global user.name "sandipmohapatra.sandipmohapatra"
+--------------------------------------------------------------------------------------------
+11)git commit -m "this is the first file in local repository"
+------------------------------------------------------------------------------------
+12)git log (to see the log files)
+--------------------------------------------------------
+13)Parallel Development - Banching
+Branches are pointer to a specific commit.
+ banches are of two types
+1)local branches
+2)Remote tracking branches.
+----------------------------------------------
+14)to create a branch 
+git branch firstbranch
+--------------------------------------------------------------
+15)switch from master branch to firstbranch
+git checkout firstbranch
+----------------------------------------------------
+create some more files then
+1)git add text5.txt
+2)git commit -m "make change in first branch"
+-----------------------------------------------------------------
+16)ls 
+will show all the files in the firstbranch
+----------------------------------------------
+17)to change to master
+git checkout master
+----------------------------------------------
+18)Parallel Development -merging
+it is a way to combine the work of different branches together
+allows to branch off, develop a new feature and combine it back in.
+------------------------------
+git merge firstbranch
+firstbranch will merge with the master branch
+------------------------------------------------------
+19)go back to the firstbranch
+git checkout firstbranch
+------------------------------------------
+*again modify the all the files 
+then commit all the changes
+
+git commit -a -m "modified files"
+all the files will be added to index and commited
+--------------------------------------------------
+cat text4.txt
+view the file content
+--------------------------------------------------------
+again goto the master branch and again view the content
+cat text4.txt
+--------------------------------------------------------
+Then merge it to add the diffence.
+----------------------------------------------------------
+Parallel development --rebasing
+This is also a way of combining the work between different branches.
+It can be used to make a linear sequence of commits.
+clean project history 
+-------------------------------------------------------------------------
+git checkout firstbranch
+*create some more files
+git add -A
+---------------------------------------------------
+git commit -a -m "adding for rebashing"
+-------------------------------------------------
+git rebase master
+git rebase firstbranch (all the files added to master)
+--------------------------------------------------------
+push changes to center repository
+--------------------------------------------------------
+1)create ssh key
+ssh-keygen
+---------------------------------------------
+overwrite(y)
+* the key will be stored in /c/Users/sandip/.ssh/id_rsa.pub
+--------------------------------------------------------
+2)see the ssh key
+cat /c/Users/91977/.ssh/id_ed25519.pub
+---------------------------------------------------------------
+3)go to setting at the top where we have (profile,logout)
+4)goto SSH and GPG keys
+5)click on New SSH Key
+6)add title and paste the key
+7)click on Add SSH Key
+-----------------------------------------------------
+go to the git
+goto your branch
+git checkout firstbranch
+------------------------------------------
+to push to the github
+-------------------------------------
+11)git push origin firstbranch
+----------------------------------------------
+12)git checkout master
+13)git push origin master
+---------------------------------------------
+GitHub.com ----gobal repository
+git---local repository
+--------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
