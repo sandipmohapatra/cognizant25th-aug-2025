@@ -1,0 +1,121 @@
+What is jQuery?
+jQuery is a lightweight, "write less, do more", JavaScript library.
+
+The purpose of jQuery is to make it much easier to use JavaScript on your website.
+
+jQuery takes a lot of common tasks that require many lines of JavaScript code to accomplish, and wraps them into methods that you can call with a single line of code.
+
+jQuery also simplifies a lot of the complicated things from JavaScript.
+
+The jQuery library contains the following features:
+
+HTML/DOM manipulation
+CSS manipulation
+HTML event methods
+Effects and animations
+Utilities
+
+Adding jQuery to Your Web Pages
+There are several ways to start using jQuery on your web site. You can:
+
+Download the jQuery library from jQuery.com
+
+The jQuery syntax is tailor-made for selecting HTML elements and performing some action on the element(s).
+
+
+Example 1:-
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script>
+$(document).ready(function()
+{
+    $("p").click(function()
+{
+        $(this).hide();
+    });
+});
+</script>
+</head>
+<body>
+<p>If you click on me, I will disappear.</p>
+<p>Click me away!</p>
+<p>Click me too!</p>
+
+</body>
+</html>
+------------------------------------------------------------------
+
+Basic syntax is: $(selector).action()
+
+A $ sign to define/access jQuery
+A jQuery action() to be performed on the element(s)
+Examples:
+
+$(this).hide() - hides the current element.
+
+$("p").hide() - hides all <p> elements.
+
+$(".test").hide() - hides all elements with class="test".
+
+$("#test").hide() - hides the element with id="test".
+
+
+
+
+
+jQuery Selectors
+jQuery selectors allow you to select and manipulate HTML element(s).
+
+jQuery selectors are used to "find" (or select) HTML elements based on their name, id, classes, types, attributes, values of attributes and much more. It's based on the existing CSS Selectors, and in addition, it has some own custom selectors.
+
+All selectors in jQuery start with the dollar sign and parentheses: $().
+$("p")
+
+
+The #id Selector
+The jQuery #id selector uses the id attribute of an HTML tag to find the specific element.
+
+An id should be unique within a page, so you should use the #id selector when you want to find a single, unique element.
+
+To find an element with a specific id, write a hash character, followed by the id of the HTML element:
+
+$("#test")
+
+The .class Selector
+The jQuery class selector finds elements with a specific class.
+
+What are Events?
+All the different visitor's actions that a web page can respond to are called events.
+
+An event represents the precise moment when something happens.
+
+Examples:
+
+moving a mouse over an element
+selecting a radio button
+clicking on an element
+The term "fires/fired" is often used with events. Example: "The keypress event is fired, the moment you press a key".
+
+Here are some common DOM events:
+
+Mouse Events	Keyboard Events	Form Events        Document/Window Events
+--------------------------------------------------------------------------------------------------
+click			keypress			submit		load
+dblclick		keydown			change		resize
+mouseenter	keyup			focus		scroll
+mouseleave	blur				unload
+
+
+
+
+
+
+
+
+
+
+
+
