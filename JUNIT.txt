@@ -1,0 +1,379 @@
+Junit:- This is used for testing our functions.
+Developers have to do 2 types of Testing
+1)unit test
+2)integration testing
+-----------------------------------------------------------
+Methods used in Junit are
+1)assertEquals(25,cal.square(5));  -----25 is the expected o/p and ,cal.square(5) is the function to test.
+-------------------
+Example-1
+-------------------
+public class Calculator 
+{
+public int square(int i)
+{
+	return i*i;
+}
+public String user(String string)
+{
+	return "Shubham";
+}
+public int sub(int i,int j)
+{
+	return i-j;
+}
+public int add(int i,int j)
+{
+	return i+j;
+}
+public String concat(String string1,String string2)
+{
+	return string1+string2;
+}
+}
+----------------------------------------------
+test
+--------------------
+import static org.junit.Assert.*;
+import org.junit.Test;
+public class CalculatorTest
+{
+Calculator cal=new Calculator();
+@Test  //used to identify that a method is a test method
+public void testSquare()
+{
+assertEquals(25,cal.square(5));
+assertEquals(36,cal.square(6));
+}
+@Test
+public void testUser()
+{
+	assertEquals("Shubham",cal.user("Shubham"));
+}
+@Test
+public void stringTest1()
+{
+	String result=cal.concat("Hello", "EveryOne");
+	assertEquals("HelloEveryOne",result);
+	String s1="Hello";
+	String s2="Hello";
+	assertSame(s1,s2);
+	String s3="helloworld";
+	String s4="HELLOWORLD";
+	assertTrue(s3.equalsIgnoreCase(s4));
+	assertTrue(s3.toLowerCase().equals(s4.toLowerCase()));
+	assertTrue(s3.toUpperCase().equals(s4.toUpperCase()));
+	assertTrue(s3.length() == s4.length());
+}
+}
+----------------------------------------------
+pom.xml
+--------------------
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+</dependency>
+----------------------------------------------------
+example-2
+--------------------
+import static org.junit.Assert.*;
+import org.junit.Test;
+public class Test1 
+{
+@Test
+public void testmyProg()
+{
+String st1=new String("abc");
+String st2=new String("abc");
+String st3=null;
+String st4="abc";
+String st5="abc";
+int val1=5;
+int val2=6;
+String[] expectedArray= {"one","two","three"};
+String[] resultArray= {"one","two","three"};
+assertEquals(st1,st2); //this is used to check 2 objects.
+assertTrue(val1 < val2); //this is used to check 2 values. It will also check true or false
+assertFalse(val1 > val2); //this is used to check 2 values. It will also check true or false
+assertNotNull(st1); //check if the object is not null 
+assertNull(st3); //check if the object is null 
+assertSame(st4,st5); //check if the object references point to the same object.
+assertNotSame(st1,st3); //check if the object references not point to the same object.
+assertArrayEquals(expectedArray,resultArray);//check whether 2 arrays are equal to each other
+}
+}
+--------------------------------------------------------------------------------------------------------
+
+example-3
+-----------------
+public class MaxNumber {
+
+	public static int findMax(int arr[])
+	{
+	int max=0;
+	for(int i=1;i<arr.length;i++)
+	{
+		if(max< arr[i])
+			max=arr[i];
+	}
+	return max;
+}
+}
+-------------------------------------------------------------------------------
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class TestMax 
+{
+@Test
+public void testMax()
+{
+	assertEquals(14,MaxNumber.findMax(new int[] {1,2,3,14}));
+	assertEquals(24,MaxNumber.findMax(new int[] {1,2,3,14,24}));
+	
+}
+}
+----------------------------------------------------------
+check the class error
+-----------------------------
+import org.junit.runner.*;
+import org.junit.runner.notification.Failure;
+public class TestClassDemo 
+{
+public static void main(String[] args) {
+	
+	Result res=JUnitCore.runClasses(TestMax.class,Calculator.class);
+	for(Failure fail:res.getFailures())
+	{
+		System.out.println("The class is fauilure :"+fail.toString());
+	}
+	System.out.println("The class is successful :"+res.wasSuccessful());
+}
+}
+----------------------------------------------------------
+Annotation
+--------------------
+1)@BeforeClass:- This annotation specifies that method will be invoked only once ,before starting all the tests.
+
+2)@Before :- This annotation specifies that method will be invoked before each test.
+
+3)@After:- This annotation specifies that method will be invoked after each test.
+
+4)@AfterClass :-  This annotation specifies that method will be invoked only once ,after finishing all the tests.
+
+---------------------------------------------------------------------------------------
+example-5
+-------------------
+import java.util.*;
+public class Test2Demo 
+{
+	String str;
+public static String reverseWord(String str)
+{
+	StringBuilder res=new StringBuilder();
+	StringTokenizer token=new StringTokenizer(str,"");
+	while(token.hasMoreTokens())
+	{
+		StringBuilder sb=new StringBuilder();
+		sb.append(token.nextToken());
+		sb.reverse();
+		res.append(sb);
+		res.append("");
+	}
+	return res.toString();
+}
+public static int cube(int n)
+{
+	return n*n*n;
+}
+}
+-------------------------------
+import static org.junit.Assert.*;
+import org.junit.*;
+public class AnnotationTest {
+
+	@BeforeClass
+	public static void beforeClass() throws Exception
+	{
+		System.out.println("First Before any Execution");
+	}
+	@Before
+	public void beforeMethod() throws Exception
+	{
+		System.out.println("Before each Test Execution");
+	}
+	@Test
+	public void testCube()
+	{
+		assertEquals(27,Test2Demo.cube(3));
+	}
+
+	
+	
+	  @Test 
+	public void reverseWord() {
+	  System.out.println(Test2Demo.reverseWord("apple is a fruit"));
+	 assertEquals("tiurf a si elppa",Test2Demo.reverseWord("apple is a fruit")); }
+	 
+	 
+	@After
+	public  void afterMethod() throws Exception
+	{
+		System.out.println("After each Test Execution");
+	}
+	@AfterClass
+	public static void afterClass() throws Exception
+	{
+		System.out.println("Finally After All Execution");
+	}
+	
+}
+-----------------------------------------------------------------------------------------------
+Log4J
+------------------
+To check the flow of the control/program we use log files.
+logger.info("This gives information");
+logger.error("This gives error information");
+logger.warn("This gives warning information");
+logger.debug("This gives debug information");
+logger.fatal("This gives fatal information");
+-----------------------------------------------------------------------
+package loggingDemo;
+import org.slf4j.*;
+public class LoggingDemo 
+{
+	static Logger log=LoggerFactory.getLogger(LoggingDemo.class);
+	public static void greater()
+	{
+		try {
+		int a=10,b=20;
+		if(a<b)
+
+				log.debug("This is debug message");
+		else
+			log.info("This is information message");
+			} catch (Exception e) {
+			
+				e.printStackTrace();
+			}
+	}
+public static void main(String[] args) {
+	log.debug("This is debug message");
+	//log.fatal("This is fatal message");
+	log.info("This is an information message");
+	log.error("This is an error message");
+	log.warn("This is a warning message");
+	greater();
+	greater();
+	
+}
+}
+------------------------------------------------------------------------------------
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-simple</artifactId>
+    <version>1.7.35</version>
+</dependency>
+---------------------------------------------------------------
+CREATE DATABASE testdb;
+USE testdb;
+
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100),
+    email VARCHAR(100)
+);
+
+INSERT INTO users (name, email) VALUES ('sandip', 'sandip@gmail.com');
+INSERT INTO users (name, email) VALUES ('kiran', 'kiran@gmail.com');
+
+----------------------------------------------------------------------------------------------------------------------------------------
+import java.sql.*;
+
+public class DatabaseManager {
+
+    private static final String URL = "jdbc:mysql://localhost:3306/testdb";
+    private static final String USER = "root";
+    private static final String PASSWORD = "1234";
+
+    public Connection getConnection() throws SQLException 
+{
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+
+    public ResultSet getUsers() throws SQLException {
+        Connection connection = getConnection();
+        String query = "SELECT * FROM users";
+        PreparedStatement statement = connection.prepareStatement(query);
+        return statement.executeQuery();
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+import org.junit.*;
+import java.sql.*;
+
+import static org.junit.Assert.*;
+
+public class DatabaseManagerTest {
+
+    private DatabaseManager dbManager;
+    private Connection connection;
+
+    @Before
+    public void setUp() throws SQLException {
+        dbManager = new DatabaseManager();
+        connection = dbManager.getConnection();
+        assertNotNull(connection);
+    }
+
+    @After
+    public void tearDown() throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            connection.close();
+        }
+    }
+
+    @Test
+    public void testGetUsers() throws SQLException {
+        ResultSet resultSet = dbManager.getUsers();
+         assertNotNull(resultSet);
+
+        int rowCount = 0;
+        while (resultSet.next()) {
+            rowCount++;
+            String name = resultSet.getString("name");
+            String email = resultSet.getString("email");
+            System.out.println(name+"  "+email);
+            assertNotNull(name);
+            assertNotNull(email);
+        }
+        assertEquals(2, rowCount);  // Assuming you have 2 users in the database
+    }
+}
+--------------------------------------------------------------------------------------------------------
+import java.sql.*;
+public class JDBC1 
+{
+public static void main(String[] args)throws Exception 
+{
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mphasis237","root","1234");
+	//Statement st=con.createStatement();
+	//st.execute("create table jdbcexample(empno int,name varchar(30),address varchar(30))");
+	//st.execute("insert into jdbcexample values(103,'Madhu','bangalore')");
+	//st.execute("update jdbcexample set address='Pune' where empno=103");
+	//st.execute("delete from jdbcexample where empno=103");
+		System.out.println("row inserted");
+}
+}
+
+-----------------------------------------------
