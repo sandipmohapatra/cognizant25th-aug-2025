@@ -8,7 +8,7 @@ Boot :- 1)core,2)jdbc,jpa,3)Theamleaf spring MVC,4)AOP
 Spring Rest:-Postman (test the Rest Application)
 node.js
 ---------------------------------------
-Front end as angular17
+Front end as ReactJS
 ----------------------------------------
 https://nodejs.org/en/download/
 ----------------------------------------------------------------------------------
@@ -437,21 +437,35 @@ public class HelloWorldController
 	
 	}
 
------------------------------------------------------------------------------------------------------
-wap to create 3 more buttons to update,delete,select
- to it.
----------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
+@Component
 
+Detect it during component scanning
+Automatically create a bean instance
+Manage its lifecycle inside the Spring ApplicationContext
+------------------------------------------------------------------------------------------------
+@Autowired
+Employee has a Passport
+--------------------------------------------------------------------------------------------------
+@Configuration is a Spring annotation that tells the container:
+👉 “This class contains bean definitions. Treat it like a replacement for XML configuration.”
+It is used along with @Bean methods to define Spring-managed beans.
+----------------------------------------------
+@ComponentScan
+read the @Component
+--------------------------------------------------
+<bean id="obj1" class="Employee">
+replacement of
+-----------------------------------------------------------
+@Bean
+	public Employee employee() 
+-----------------------------------------------------------
+<property name="empid" value="101"></property>
+replacement of
+----------------------------------
+employee.setEmpId(1234);
 
-
-
-
-
-
-
-
-
-
+-----------------------------------------------------------------
 
 
 

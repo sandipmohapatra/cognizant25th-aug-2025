@@ -4,9 +4,9 @@ step1:- create a folder
 
 step 2:- npm create vite@latest my-app --template react
 
-step 3:- create-react-app my-app
+step 3:- create-react-app helloworld
 
-step 4:-cd my-app
+step 4:-cd helloworld
 
 step 5:-npm start
 -----------------------------------Browser------------------------
