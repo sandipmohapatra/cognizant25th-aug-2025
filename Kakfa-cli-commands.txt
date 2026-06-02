@@ -1,0 +1,188 @@
+Start ZooKeeper
+---------------
+bin\windows\zookeeper-server-start.bat etc\kafka\zookeeper.properties
+
+Start Kafka Broker
+-----------------
+bin\windows\kafka-server-start.bat etc\kafka\server.properties
+
+Stop Kafka Broker
+-----------------
+bin\windows\kafka-server-stop.bat
+
+Stop ZooKeeper
+--------------
+bin\windows\zookeeper-server-stop.bat
+
+
+2️⃣ Topic Management Commands
+------------------------------
+Create a topic
+--------------
+bin\windows\kafka-topics.bat --create ^
+--topic test-topic ^
+--bootstrap-server localhost:9092 ^
+--replication-factor 1 ^
+--partitions 1
+
+
+List topics
+-----------
+bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+
+
+Describe a topic
+----------------
+bin\windows\kafka-topics.bat --describe ^
+--topic test-topic ^
+--bootstrap-server localhost:9092
+
+
+Delete a topic
+--------------
+bin\windows\kafka-topics.bat --delete ^
+--topic test-topic ^
+--bootstrap-server localhost:9092
+
+
+
+3️⃣ Producer Commands (Write Messages)
+-----------------------------------
+Start console producer
+-----------------------
+bin\windows\kafka-console-producer.bat ^
+--broker-list localhost:9092 ^
+--topic test-topic
+
+
+Producer with key
+----------------
+bin\windows\kafka-console-producer.bat ^
+--broker-list localhost:9092 ^
+--topic test-topic ^
+--property parse.key=true ^
+--property key.separator=:
+
+
+
+4️⃣ Consumer Commands (Read Messages)
+------------------------------------
+Consume messages (latest)
+----------------------
+bin\windows\kafka-console-consumer.bat ^
+--bootstrap-server localhost:9092 ^
+--topic test-topic
+
+
+Consume from beginning
+-----------------------
+bin\windows\kafka-console-consumer.bat ^
+--bootstrap-server localhost:9092 ^
+--topic test-topic ^
+--from-beginning
+
+
+Consume with consumer group
+---------------------------
+bin\windows\kafka-console-consumer.bat ^
+--bootstrap-server localhost:9092 ^
+--topic test-topic ^
+--group my-group
+
+
+5️⃣ Consumer Group Commands
+----------------------------
+
+List consumer groups
+--------------------
+bin\windows\kafka-consumer-groups.bat ^
+--bootstrap-server localhost:9092 ^
+--list
+
+
+Describe a consumer group
+--------------------------
+bin\windows\kafka-consumer-groups.bat ^
+--bootstrap-server localhost:9092 ^
+--describe ^
+--group my-group
+
+Reset consumer group offsets
+-----------------------------
+bin\windows\kafka-consumer-groups.bat ^
+--bootstrap-server localhost:9092 ^
+--group my-group ^
+--topic test-topic ^
+--reset-offsets --to-earliest --execute
+
+6️⃣ Broker & Cluster Information
+---------------------------
+
+List brokers (via ZooKeeper)
+-----------------------
+bin\windows\zookeeper-shell.bat localhost:2181 ls /brokers/ids
+
+
+Describe broker configs
+-----------------------
+bin\windows\kafka-configs.bat ^
+--bootstrap-server localhost:9092 ^
+--entity-type brokers ^
+--entity-name 0 ^
+--describe
+
+
+7️⃣ Topic Configuration Commands
+-------------------------------
+
+Describe topic configs
+------------------
+bin\windows\kafka-configs.bat ^
+--bootstrap-server localhost:9092 ^
+--entity-type topics ^
+--entity-name test-topic ^
+--describe
+
+
+Alter topic config
+-------------------
+bin\windows\kafka-configs.bat ^
+--bootstrap-server localhost:9092 ^
+--entity-type topics ^
+--entity-name test-topic ^
+--alter ^
+--add-config retention.ms=60000
+``
+
+8️⃣ Log & Storage Utilities
+-----------------------
+Check Kafka log directories
+----------------------------
+bin\windows\kafka-log-dirs.bat ^
+--bootstrap-server localhost:9092 ^
+--describe
+
+
+9️⃣ Performance & Testing Tools
+---------------------------
+Producer performance test
+-----------------------
+bin\windows\kafka-producer-perf-test.bat ^
+--topic test-topic ^
+--num-records 1000 ^
+--record-size 100 ^
+--throughput -1 ^
+--producer-props bootstrap.servers=localhost:9092
+
+
+Consumer performance test
+-------------------------
+bin\windows\kafka-consumer-perf-test.bat ^
+--bootstrap-server localhost:9092 ^
+--topic test-topic ^
+--messages 1000
+``
+
+
+
+
