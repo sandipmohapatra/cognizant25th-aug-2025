@@ -1,0 +1,2612 @@
+SpringBoot Microservices
+-------------------------------------------------------------------------------------------------------------------------------------
+1)Monolithic application :- Creating one project that contains many modules.
+2)In case of java finally we get one single jar/war file.
+3)In single project we have a collection of multiple modules.
+4)One request made by client goes to the server and the server process it and give the response.
+Server are multithreaded and can give support to a max to 200 request.It is by default we can change this.
+when the request comes to the server the load is on server increases.
+1 thread is called as 1 load to server.
+we have tomcat server ,jetty server they have max capacity of handling of 200 threads.(default)   
+when we increase the capacity only it will not work we have increase the server count also or ram capacity to handle the load.
+-----------------------------------------------------------------------------------------------------------------------------------------
+Load Balance :- It is distrubuting the load among the servers.
+There is a tool in microservices to balance the load of the server.
+Instance :- An application running under one server is called as one instance.
+Scaling :- It the process of increasing performance of a server.ie fast executing more number of request handling.
+we have 2 types of scaling:-
+1)Horizontal Scaling :- creating new instance or new server instance.
+example:- Run application at 3 servers.
+2)vertical scaling:- Increase capacity/configuration of a system.
+example :- your system has 8gm ram.you increased to 16gb ram.The performance will increase.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+LBS =load balancer server.It holds InstanceID ,IP,Port etc of the client.
+-----------------------------------------------------------------------------------------------------------------------
+Monolithic appliaction advantage
+-------------------------------------------------
+1)simple to develop.(one technology,framework and code).
+2)simple to test end to end using selenium.
+3)simple to build and deploy.
+4)simple to scale and load balance.
+-------------------------------------------------------------------------
+Limitation of Monolithic
+-------------------------------------------
+1)The services are tightly connected.any small modification we have to re-deploy.
+2)If there is any bug in one module it may effect the other modules.
+3)Adopting new technology is not a easy process.
+4)If new modules are added after development it size may increase and the application may become more complex.
+5) Testing and debuging will take more time.
+---------------------------------------------------------------------------------------------------------------------------
+ Microservices Architecture
+------------------------------------------------------
+1)It is de-coupled Architecture Design pattern.
+2)In this one or two services/module behaves like one application or project.
+3)In this one service communicates with other using webservices concept.
+4)in simple divide monolithic application modules into projects and link them.
+
+Advantage :-
+------------------
+1)re-deploy of all services not required if we modify any one service code.
+2)If one service is not working it will not effect other service.
+3)adopting new technology is a easy process.It used webservices to integrate one service with another.
+4)Enhance new modules or service will be easy to code and integrate.
+5)testing is also easy in this case.
+
+Limitations:-
+-------------------------
+1)maintaining multiple services and monitering is not a easy process.
+2)hardware and networking configurations is required mostly.
+3)microservices concept is good only if it a distributed application and has multiple clients.
+example:- SBI has many clients.
+-->mobile application
+-->ATM
+-->Internet Banking
+4)If application is very big having multiple services and number of users are more then we can use micro-services.
+5)It is not required for small application,less user .(example:-restaurants billing s/w ,hospital billing )
+6)can can used for large scale application.(amazon,flipcard)
+------------------------------------------------------------------------------------------------
+SOA :- Service Oriented Architecture
+------------------------------------------------------------
+It is a intergration of two projects /application which are running in two different server.
+
+Integration types:-
+1)Homogeneous integration:- two projects are developed using same language.
+2)Hetrogeneous integration.:- two projects are developed using different language.
+
+SOA is a Architecture used to link Homogeneous application.
+
+SOA has 3 components and 3 operations.
+Three components are :- Service provider:- Who develops the service writing the logic.
+service register:-It holds all the service providers services.
+service consumer:- consumer uses the service.
+
+There are 3 operations:-
+1)publish:- Read service provider code.
+2)find:-Consumer application will communicate and find the service.
+3)bind:- It need to define a client code,to makes http request and get httpreponse .
+
+In case any code modification are done in provider then we must re-publish and re-find.
+-------------------------------------------------------------------------------------------------------------------------------------
+Example of Microservice
+------------------------------------------
+1)Fare microservice
+2)booking microservice
+3)Search microservices
+4)checkin microservices
+to each services to communicate between each other we use RabbitMQ as a messaging listener.
+
+There are different messaging listener present :- 1)RabbitMQ ,2)ActiveMQ ,3)Kafka
+
+we have HTTP listener like :- 1)tomcat server  2)jetty server 3)weblogic server which are embeded in springBoot.
+
+each Microservices are self contained means every microservices should have it own
+1)Project code 2)project lib 3)embedded server 4)JVM 5)operating system.
+
+------------------------------------------
+1)Microservices uses lightweight protocols such as rest and http.
+2)It focuses on decoupling.
+3)It uses simple messaging listener.
+4)microservices are much better in fault tolerance.
+5)Each microservices may have independent databases.
+6)Microservices uses Spring Cloud.
+
+Features of Microservices
+------------------------------------
+1)It supports publish and find operation with Registery server.
+publish : provides microservice details to Registery server.
+find:able to fetch other microservices from same Registery server.
+
+2)supports Intra communication with other Microservices using any client.
+
+There are 3 different types of clients which communicates between each other.
+1)Discovery client/EurekaClient
+2)Load balance client
+3)Declarative client.
+
+3)Support circuit breaker process
+If any MS is throwing exception for continious request then it will stop executing and 
+provide alert to the dashboard.
+
+4)API Gateway support
+every MS might be running in different servers (IP:Port).we can not give all MS 
+URLS to end clients.
+There must be single-entry and single-exist point provided.ie called as API Gateway.
+
+5)Register and Discovery server (R&D server)
+
+Every MS must be registered with R&D server.
+It means MS will provide details like IP,PORT ,ServiceID ,InstanceID,Load Details etc.
+
+6)Spring cloud Netflix Eureka is software tool provided to implement R&D server.
+
+each MS after coding must be published into R&D server by using key-value 
+eureka.client.register-with-eureka=true
+
+each MS should able to fetch into MS details by using key-value 
+eureka.client.fetch-register=true
+
+-------------------------------------------------------------------------------------------------
+Eureka server : R&D server
+register and discovery server :- The microservices are registered here.They communicate between each other by using activeMQ ,Kafka.
+
+1)Client :- it is developed using restAPI.
+It will communicate using HTTP and JSON to transfer the data.
+
+2)API Gateway and security for checking the authentication and autherization of the data.
+
+3)Once the authentication and autherization is done it can communicate with the microservices.
+
+4)we have the database to store data or to check the authentication and autherization of the user.
+
+5)ActiveMQ:- It is used to communicate between 2 or more microservice.
+example:- we have a MS called BookMyShow when you book a ticket it will communicate with the paytm wallet for money.This communication is done by ActiveMQ,Kafka,RabitMQ.
+
+6)Eureka server:- It is also known as Register and discovery server.
+All the microservices are registered here.They are given different portno and IP address to run.
+The MS will fetch other MS information present in the container.That is known as discovery or fetching of information.
+This eureka server will support Load Balancing.
+
+7)CircuitBreaker (Hystrix) server :- it is used for exception handling.When error is happening continiously it will stop the client from accessing the server.
+
+8)config server :- It has the configuration(IP address,Port no,service id,instance id) of each MS.It will be in the form of key and value pair.
+
+when a client is communicating with a MS an instance is created.as many client want to intract with the MS that many instances will be created.
+-----------------------------------------------------------Eureka server---------------------------------------------------
+Eureka server:-It run on port no 8761
+
+eureka.client.register-with-eureka=false. (regsitry)
+
+eureka.client.fetch-register=false.(discovery)
+--------------------------------------------------------------------
+step-1:- file ->new ->spring starter project.
+step-2:-create a project and paste the src and pom.xml
+step3:-localhost:8761
+--------------------------------------------------------------------------------------
+client:-
+server.port=8866
+spring.application.name=ADDRESS-SERVICE
+eureka.client.service-url.default-zone=http://localhost:8761/eureka
+---------------------------------------------------------------------------------------------------------------
+step-1 :- run the eureka server first
+step-2 :- Then run the client 
+-------------------------------------------------------------------------
+example-1
+Address Client
+---------------------
+package com.example.demo;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/address")
+public class AddressController 
+{
+@GetMapping("/show")
+public String showMsg()
+{
+	String address="My address is Bangalore";
+	System.out.println("Hello welcome to Bangalore");
+	return address;
+	
+}
+}
+----------------------------------------------------------------------------------
+main.java
+-----------------
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+@SpringBootApplication
+@EnableEurekaClient  or DiscoveryClient
+public class SpringcloudAddressServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringcloudAddressServiceApplication.class, args);
+	}
+
+}
+---------------------------------------
+server.port=8866
+spring.application.name=ADDRESS-SERVICE
+eureka.client.service-url.default-zone=http://localhost:8761/eureka
+-------------------------------------------------------------------------------
+Bank client
+------------------------
+package com.example.demo;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/bank")
+public class BankController 
+{
+@GetMapping("/details")
+public String showMsg()
+{
+	String bankdetail="My Bank is SBI";
+	System.out.println("Hello welcome to SBI");
+	return bankdetail;
+	
+}
+}
+--------------------------------------------------------------------------------------------
+main.java
+-------------------
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+@SpringBootApplication
+@EnableEurekaClient
+public class SpringcloudAddressServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringcloudAddressServiceApplication.class, args);
+	}
+
+}
+---------------------------------------------------
+server.port=8877
+spring.application.name=BANK-SERVICE
+eureka.client.service-url.default-zone=http://localhost:8761/eureka
+
+---------------------------------------------------------------------
+Eureka Server
+-------------------------
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+
+@SpringBootApplication
+@EnableEurekaServer
+public class SpringcloudEurekaServerDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringcloudEurekaServerDemoApplication.class, args);
+	}
+
+}
+----------------------------------------
+server.port=8761
+eureka.client.register-with-eureka=false
+eureka.client.fetch-register=false
+-----------------------------------------------------------
+Consumer
+-------------------
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+@SpringBootApplication
+@EnableEurekaClient
+public class SpringcloudAddressServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringcloudAddressServiceApplication.class, args);
+	}
+
+}
+------------------------------------------------------------------------------
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+
+
+@Component
+public class ConsumeService {
+	@Autowired <--------------------------------1)Autowire DiscoveryClient
+	private DiscoveryClient client;
+	public String calladdressMethods()
+	{                                                               2)It calls getInstances() by passing serviceId of provider and return List
+		List<ServiceInstance> list = client.getInstances("ADDRESS-SERVICE");
+
+		ServiceInstance si=list.get(0); 3)Read one ServiceInstance from the list at index#0
+		URI uri=si.getUri();		4)read URI from si
+
+		String uri=uri+"/address/show"; 5)add path to URI
+		
+		RestTemplate rt=new RestTemplate(); 6)RestTemplate call
+		
+		String x=rt.getForObject(url, String.class);
+		
+		return x;
+	}
+
+
+	public String callbankMethods() 
+	{
+		List<ServiceInstance> list1 =client.getInstances("BANK-SERVICE"); 
+		ServiceInstance si1=list1.get(0);
+			String url1=si1.getUri() +"/bank/details"; 
+			RestTemplate rt=new RestTemplate(); 
+			String y=rt.getForObject(url1, String.class); 
+			return y;
+
+	}
+
+
+}
+-----------------------------------------------------------------------------------
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.ConsumeService;
+@RestController
+@RequestMapping("/cust")
+public class AccessController 
+{
+	@Autowired   <-----------------------------we are accessing the consumeService
+	private ConsumeService cons;
+	
+@GetMapping("/access")
+public String showMsg()
+{
+	String detail="My Address details"+ cons.calladdressMethods();
+	String detail1="My Bank details"+ cons.callbankMethods();
+		return (detail + " "+detail1);
+	
+}
+}
+----------------------------------------------------------------------------------------------------------------------
+service provider-----Bank ----showmsg()
+service provider-----Address----showmsg()
+service consumer----AccessController -----showmsg() in this we combine both bank and address showmsg().
+-------------------------------------------------------------------------------------------------------------------------------
+
+wap to create a calculator service
+wap to create a currency convertor service.(example:- 1 dollor=Rs 74)
+wap to create a service consumer to consume the 2 services.
+------------------------------------------------------------------------------------------------------------ 
+we have 3 types of client
+1)Discovery client/EurekaClient
+2)Load balance client
+3)Declarative client.
+
+2)Load balance client
+This client is used to fetch only one Instance which has less load factor based on given ServiceId.
+we have client and server as Eureka server.When the client is hiting the server it is known as load factor.
+to reduce the load of the server we use multiple servers.The load balancer client will deside which server to hit.
+example:-
+server 1 has 20 client
+server 2 have 15 clients
+so the load balancer client will hit the server 2.
+--------------------------------------------------------------------------------------------------------------------------
+ The load balnacer client will only fetch one instance from eureka.
+so we have to 
+1)Autowire LoadBalancerClient at consumer code.
+2)call method choose(ServiceId)
+3)Read URI from serviceInstance
+4)add path to uri that provide URL
+5)make http call using RestTemplate
+-----------------------------------------------------------------------------------------------
+service-provider
+-------------------------
+package in.sandip;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.*;
+@RestController
+@RequestMapping("/gst")
+public class GstRestController {
+	
+	@Value("${server.port}")
+	private String port;
+	
+	@GetMapping("/data")
+	public String getDetails() 
+	{
+		int id=101;
+		String name="Samsung TV";
+		double price=45000.56;
+		System.out.println("product id :"+id);
+		System.out.println("product name :"+name);
+		System.out.println("product price:"+price);
+		double gst=price*0.18;
+		double total=price+gst;
+		return "Total With  GST = "+total+" " + "port :"+port;
+	}
+}
+------------------------------------------------------------------------------------------------------------
+server.port=9902
+#ServiceId
+spring.application.name=GST-SERVICE
+# Eureka Details
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+# Instance Id
+eureka.instance.instance-id=${spring.application.name}:${random.value}
+---------------------------------------------------------------------------------------------------------
+service-consumer
+----------------------------------
+package in.sandip;
+
+import java.net.URI;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+@Component
+public class GstRestConsumer {
+
+	//1. Autowire LoadBalancerClient
+	@Autowired
+	private LoadBalancerClient client;
+	
+	public String getDetailsFromGst() {
+		//2. get one ServiceInstance by using ServiceId
+		ServiceInstance si = client.choose("GST-SERVICE");
+		
+		//3. Read URI from SI
+		URI uri = si.getUri();
+		
+		//4. Add path to get URL
+		String url = uri + "/gst/data";
+		
+		//5. Use RestTemplate
+		RestTemplate rt = new RestTemplate();
+		
+		//6. make HTTP call
+		String response = rt.getForObject(url, String.class);
+		
+		return response;
+	}
+}
+-----------------------------------------------------------------------------------------------------------------------
+package in.sandip;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+@RequestMapping("/invoice")
+public class InvoiceRestController {
+	@Autowired
+	private GstRestConsumer consumer;
+
+	@GetMapping("/info")
+	public String showInfo() {
+		return "FROM INVOICE => " + consumer.getDetailsFromGst();
+	}
+}
+------------------------------------------------------------------------------------------------------------------------------
+server.port=8086
+spring.application.name=INVOICE-SERVICE
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+------------------------------------------------------------------------------------------------
+Netflix Feign Client (Declarative client)
+-----------------------------------------------------------------------------------
+The programmer neednot write much code.The code will be auto-generated.
+The HTTP call like in LoadBalancerClient and eureka client will be auto-genarated in feign client.
+We need to provide input like :- ServiceId,path,Input/output,methodtype and one interface and abstract method.
+Feign client will generate one class at runtime by taking interface given by programmer.
+* we define interface and abstract method with details,feign client generate code using LoadBalancerClient .
+*The consumer interface should have @FeignClient("ServiceId");
+--------------------------------------------------------------------------------------------------
+service-provider
+----------------------main.java----------------------------------------
+MS =>CART-SERVICE----<-----------properties
+@EnableEurekaClient
+----------------------------------------------------
+ restController.java
+-------------------------
+@RestController
+@RequestMapping("/cart")
+public class CartRestController
+{
+@GetMapping("/msg");
+public String getMsg()
+{
+return "Hello Cart";
+}}
+------------------------------------------------------------------------------
+service-consumer
+--------------------------------
+main.java
+-------------------------
+@EnableEurekaClient
+@EnableFeignClients
+
+MS-PAYMENT-SERVICE------<--------properties
+-------------------------------------------------------------
+RestConsumer.java         Here the code will be autogenerated
+---------------------------------
+@FeignClient("CART-SERVICE");
+public interface RestConsumer
+{
+@GetMapping("/cart/msg")
+public String findMsg();
+}
+-------------------------------------------------------------------------------------
+PaymentController
+---------------------------
+@RestController
+@RequestMapping("/pay")
+public class PaymentController
+{
+@AutoWired
+private RestConsumer consumer;
+
+@GetMapping("/msg")
+public String getPayMsg()
+{
+return "from payment"+consumer.findMsg();
+}}
+---------------------------------------------------------------------------------------------------------------------
+pom.xml
+--------------------
+<dependency>
+<groupId>org.springframework.cloud</groupId>
+<artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+-----------------------------------------------------------------------------------------------------
+Example-1
+FeignClient(service-provider)
+-----------------------------------------------
+package com.example.demo;
+
+public class Cart 
+{
+private Integer id;
+private String code;
+private Double cost;
+public Integer getId() {
+	return id;
+}
+public void setId(Integer id) {
+	this.id = id;
+}
+public String getCode() {
+	return code;
+}
+public void setCode(String code) {
+	this.code = code;
+}
+public Double getCost() {
+	return cost;
+}
+public void setCost(Double cost) {
+	this.cost = cost;
+}
+public Cart(Integer id, String code, Double cost) {
+	super();
+	this.id = id;
+	this.code = code;
+	this.cost = cost;
+}
+public Cart() {
+	super();
+}
+@Override
+public String toString() {
+	return "Cart [id=" + id + ", code=" + code + ", cost=" + cost + "]";
+}
+
+}
+-----------------------------------------------------
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/cart")
+public class CartRestController 
+{
+@Value("${server.port}")
+private String port;
+
+@GetMapping("/msg")
+public String getMsg()
+{
+	return "From service-provider "+ port;
+}
+
+@GetMapping("/ob/{code}")
+public Cart getCart(@PathVariable String code)
+{
+	return new Cart(101,code,45000.56);
+}
+
+@PostMapping("/insert")
+public ResponseEntity<String> createCart(@RequestBody Cart cart)
+{
+	return ResponseEntity.ok(cart.toString());
+}
+
+}
+------------------------------------------------------------------------------------
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+@SpringBootApplication
+@EnableEurekaClient
+public class SpringCloudFeignCartServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringCloudFeignCartServiceApplication.class, args);
+	}
+
+}
+---------------------------------------------------------------------
+server.port=9900
+spring.application.name=CART-SERVICE
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+eureka.instance.instance-id=${spring.application.name}:${random.value}
+-------------------------------------------------
+feignClient consumer
+-----------------------------------------------
+package com.example.demo;
+
+public class Cart 
+{
+private Integer id;
+private String code;
+private Double cost;
+public Integer getId() {
+	return id;
+}
+public void setId(Integer id) {
+	this.id = id;
+}
+public String getCode() {
+	return code;
+}
+public void setCode(String code) {
+	this.code = code;
+}
+public Double getCost() {
+	return cost;
+}
+public void setCost(Double cost) {
+	this.cost = cost;
+}
+public Cart(Integer id, String code, Double cost) {
+	super();
+	this.id = id;
+	this.code = code;
+	this.cost = cost;
+}
+public Cart() {
+	super();
+}
+@Override
+public String toString() {
+	return "Cart [id=" + id + ", code=" + code + ", cost=" + cost + "]";
+}
+
+}
+-------------------------------------------------------------------------
+package com.example.demo;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+@FeignClient("CART-SERVICE")
+public interface CartRestConsumer {
+@GetMapping("/cart/msg")
+public String findMsg();
+
+@GetMapping("/cart/ob/{code}")
+public String findCart(@PathVariable String code);
+
+@PostMapping("/cart/insert")
+public ResponseEntity<String> createCart(@RequestBody Cart cart);
+}
+----------------------------------------------------------------------------------------------
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/pay")
+public class PaymentRestController 
+{
+@Autowired
+private CartRestConsumer cons;
+
+@GetMapping("/msg")
+public String getPayMsg()
+{
+	return "from payment "+cons.findMsg();
+}
+
+@GetMapping("/ob")
+public String getCartCord()
+{
+	return "from payment "+cons.findCart("Sumsung TV");
+}
+
+@PostMapping("/create")
+public String createCart()
+{
+	return "from payment "+cons.createCart(new Cart(101,"Samsung Refrizerator",17500.34));
+}}
+---------------------------------------------------------------------------
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+
+@SpringBootApplication
+@EnableEurekaClient
+@EnableFeignClients
+public class SpringCloudFeignCartConsumerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringCloudFeignCartConsumerApplication.class, args);
+	}
+
+}
+-------------------------------------------------------------------------------------
+server.port=8686
+spring.application.name=PAYMENT-SERVICE
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+----------------------------------------------Assignment-1---------------------------------------------------
+
+Create a bank service provider
+-------------------------------------------------
+accno
+Bank name
+rate for house loan
+rate for gold loan
+branch
+---------------------------------------------------
+insert,select,delete,getbyId
+----------------------------------------------------
+
+<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.46</version>
+		</dependency>
+----------------------------------------Service-provider------------------------------------------------------------------
+Micro-service(course--student) :- many-one (many student can take one course)
+------------------------------------------------------------------------------------------------------------------------------
+Couse eaxmple:-
+---------------------------
+model
+------------
+package com.example.demo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class Course 
+{
+@Id
+@GeneratedValue
+private Integer cid;
+private String cname;
+private Double cfee;
+private String ctype;
+private Double discount;
+private Double gst;
+
+public Course(Integer cid, String cname, Double cfee, String ctype, Double discount, Double gst) 
+{
+	this.cid = cid;
+	this.cname = cname;
+	this.cfee = cfee;
+	this.ctype = ctype;
+	this.discount = discount;
+	this.gst = gst;
+}
+public String getCname() {
+	return cname;
+}
+public void setCname(String cname) {
+	this.cname = cname;
+}
+
+public Integer getCid() {
+	return cid;
+}
+public void setCid(Integer cid) {
+	this.cid = cid;
+}
+public Double getCfee() {
+	return cfee;
+}
+public void setCfee(Double cfee) {
+	this.cfee = cfee;
+}
+public String getCtype() {
+	return ctype;
+}
+public void setCtype(String ctype) {
+	this.ctype = ctype;
+}
+public Double getDiscount() {
+	return discount;
+}
+public void setDiscount(Double discount) {
+	this.discount = discount;
+}
+public Double getGst() {
+	return gst;
+}
+public void setGst(Double gst) {
+	this.gst = gst;
+}
+@Override
+public String toString() {
+	return "Course [cid=" + cid + ", cname=" + cname + ", cfee=" + cfee + ", ctype=" + ctype + ", discount=" + discount
+			+ ", gst=" + gst + "]";
+}
+
+public Course() {
+	super();
+}
+
+
+}
+----------------------------------------------------------
+repository 
+------------------
+package com.example.demo;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface CourseRepository extends CrudRepository<Course,Integer>
+{
+}
+--------------------------------------------------------------------------------
+service
+---------------
+package com.example.demo;
+
+import java.util.List;
+
+public interface ICourseService 
+{
+public Integer saveCourse(Course c);
+public List<Course> getAllCourse();
+public Course getOneCourse(Integer id);
+}
+-----------------------------------------------------------------
+serviceImpl
+----------------------
+package com.example.demo;
+
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CourseServiceImpl implements ICourseService 
+{
+@Autowired
+private CourseRepository repo;
+@Autowired
+private CourseUtil util;
+Course x=null;
+
+	@Override
+	public Integer saveCourse(Course c) {
+		util.calculateGst(c);
+		c=repo.save(c);
+		return c.getCid();
+	}
+
+	@Override
+	public List<Course> getAllCourse() {
+		List x=(List) repo.findAll();
+		return x;
+	}
+
+	@Override
+	public Course getOneCourse(Integer id) {
+	Optional<Course> opt=repo.findById(id);
+		return opt.get();
+	}
+
+}
+--------------------------------------------------------------------------
+util
+---------
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CourseUtil
+{
+public void calculateGst(Course c)
+{
+	double fee=c.getCfee();
+	double discount=fee * 10.0/100;
+	double gst=fee*18.0/100;
+	c.setDiscount(discount);
+	c.setGst(gst);
+}
+}
+---------------------------------------------------------------------
+controller
+-------------------
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/course")
+public class CourseRestController 
+{
+	@Autowired
+	private ICourseService service;
+	
+	//1. to save the data
+	@PostMapping
+	public ResponseEntity<String> saveCourse(@RequestBody Course c)
+	{
+		Integer id=service.saveCourse(c);
+		ResponseEntity<String> resp=new ResponseEntity("Course"+id+" Created",HttpStatus.CREATED);
+		return resp;
+	}
+//2. to view the data	
+@GetMapping("/all")
+public List<Course> getAllCourse()
+{
+	List<Course> allCourse=service.getAllCourse();
+	return allCourse;
+	}
+
+//3. Fetch course by id.
+@GetMapping("/{id}")
+public ResponseEntity<?> getCourseId(@PathVariable Integer id)
+{
+	Course course=service.getOneCourse(id);
+	ResponseEntity<?> resp=null;
+	try
+	{
+	 resp=ResponseEntity.ok(course);
+	}
+	catch(Exception ae)
+	{
+	 resp=new ResponseEntity<String>("Unable to fetch Data",HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+		return resp;
+	
+}
+
+}
+---------------------------------------------------------------------------------------------------------------------------------
+course model
+-----------------
+package com.example.demo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+@Entity
+public class Course 
+{
+@Id
+@GeneratedValue
+private Integer cid;
+private String cname;
+private Double cfee;
+private String ctype;
+private Double discount;
+private Double gst;
+public Integer getCid() {
+	return cid;
+}
+public void setCid(Integer cid) {
+	this.cid = cid;
+}
+public String getCname() {
+	return cname;
+}
+public void setCname(String cname) {
+	this.cname = cname;
+}
+public Double getCfee() {
+	return cfee;
+}
+public void setCfee(Double cfee) {
+	this.cfee = cfee;
+}
+public String getCtype() {
+	return ctype;
+}
+public void setCtype(String ctype) {
+	this.ctype = ctype;
+}
+public Double getDiscount() {
+	return discount;
+}
+public void setDiscount(Double discount) {
+	this.discount = discount;
+}
+public Double getGst() {
+	return gst;
+}
+public void setGst(Double gst) {
+	this.gst = gst;
+}
+
+
+}
+---------------------------------------------------------
+student
+-------------
+package com.example.demo;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Student
+{
+@Id
+@GeneratedValue
+private Integer stdId;
+private String stdName;
+private Double stdFee;
+
+@ManyToOne
+@JoinColumn(name="cidFk")
+private Course cob;
+
+public Integer getStdId() {
+	return stdId;
+}
+
+public void setStdId(Integer stdId) {
+	this.stdId = stdId;
+}
+
+public String getStdName() {
+	return stdName;
+}
+
+public void setStdName(String stdName) {
+	this.stdName = stdName;
+}
+
+public Double getStdFee() {
+	return stdFee;
+}
+
+public void setStdFee(Double stdFee) {
+	this.stdFee = stdFee;
+}
+
+public Course getCob() {
+	return cob;
+}
+
+public void setCob(Course cob) {
+	this.cob = cob;
+}
+}
+-------------------------------------------------------------------------------------------
+studentRepository
+-------------------------------
+package com.example.demo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface StudentRepository extends JpaRepository<Student, Integer>
+{
+
+}
+------------------------------------------------------------------------------------------------------------
+IStudentService
+--------------------------
+package com.example.demo;
+
+import java.util.List;
+
+public interface IStudentService 
+{
+public Integer saveStudent(Student s);
+public List<Student> getAllStudents();
+}
+------------------------------------------------------------------------------
+StudentServiceImpl
+---------------------------------
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class StudentServiceImpl implements IStudentService{
+@Autowired
+	private StudentRepository repo;
+	
+	@Override
+	public Integer saveStudent(Student s) {
+				return repo.save(s).getStdId();
+	}
+
+	@Override
+	public List<Student> getAllStudents() {
+		
+		return repo.findAll();
+	}
+
+}
+------------------------------------------------Explaination-------------------------------------------------------------
+student----- stdId,stdName,stdFee,cidFk;
+course----- cid,cname,cfee,ctype,discount,gst;
+cidFk---courseId which will be repeated as mant student can take a single course(c,c++,java)
+
+stdId=1
+StdName=Shubham
+stdFee=5000
+cob = 101 <---course/{id} .This course id will be taken from the course micro-service.
+--------------------------------------------------------------------------------------------------------------------------------
+cid=101,
+cname=java,
+cfee=7000,
+ctype=Normal Track,
+discount=10%,
+gst=18%;
+-----------------------------------------------------------------------------------
+In the consumer we have to write a 
+@GetMapping("/couse/{id}")
+It will take the data from the name="COURSE-SERVICE"
+------------------------------------------End of Explaination--------------------------------------------
+CourseRestConsumer
+--------------------------------
+package com.example.demo;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+@FeignClient(name="COURSE-SERVICE")
+public interface CourseRestConsumer {
+
+	@GetMapping("/course/{id}")
+	public ResponseEntity<Course> getCourseById(@PathVariable Integer id);
+}
+-------------------------------------------------------------------------------------------------------------------
+StudentRestController
+---------------------------------------
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/student")
+public class StudentRestController
+{
+@Autowired
+private IStudentService service;
+@Autowired
+private CourseRestConsumer consumer;
+
+@PostMapping
+public ResponseEntity<String> saveStudent(@RequestBody Student student)
+{
+	//read courseid from JSON object and get Full Course Object
+	Course cob=consumer.getCourseById(student.getCob().getCid()).getBody();
+	student.setCob(cob);
+	Integer id=service.saveStudent(student);
+	ResponseEntity<String> resp=ResponseEntity.ok("Student ' " +id+ " ' saved");
+	return resp;
+	}
+
+@GetMapping("/all")
+public List<Student> getAllStudents()
+{
+	List<Student> allStudents=service.getAllStudents();
+	return allStudents;
+}	
+}
+------------------------------------------------------------------
+pom.xml
+------------------
+<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.46</version>
+</dependency>
+-----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+Micro-service (company--address)(one-to-one) Has-a relationship
+-----------------------------------------------------------------------------------------------------------------
+Service provider :-
+----------------------------------
+address and company (has-a) relationship
+----------------------------------
+address :- id=1,lane,street,city,state,country,pincode
+company:- id=1,name,regid,ctype,parentorg,modeofoperate,servicecode,aidfk=1
+
+first it will display the company then it will display the address.
+
+one company ---one address.
+---------------------------------------------
+There are 4 types of relationship
+-----------------------------------------------------
+one--to--one relationship(one company--one address)
+one--to--many relationship(one teacher---many student)
+many--to--one relationship (reverse)
+many---to---many(in collage we have many teachers for different subjects and many students in a class.
+----------------------------------------------------------------------------------------------------------------------------------------------
+cascade :- it is a feature of hibernate which is used to mange the state of the mapped entity whenever the state of its relationship owner change then this entity associated with it should also be changed.
+
+Cascade.All :- it cascades all operations(save,persist,remove,lock,merge etc).It perform all cascade types that are listed below.
+-----------------------------------
+Cascade.delete/remove
+Cascade.Detach
+Cascade.merge
+Cascade.lock
+Cascade.persist
+Cascade.refresh
+Cascade.save/update
+
+we have a parent table company -----any operation done to the parent will automatically effect the child table.
+The child table is address.
+*example company is deleted then the address will be deleted.
+
+@OneToOne(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+@JoinColumn(name ="aidFK")
+private Address addr;
+
+
+fetch = FetchType.EAGER when we fetch the parent table the child table data will also be fetched.
+-------------------------------------------------------------------------------------------------------------------------------
+Company is the service provider
+----------------------------------------
+entity---address
+------------------
+package in.sandip.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+
+@Entity
+@Table(name="addr_tab")
+public class Address {
+	@Id
+	@Column(name="com_id_col")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	@Column(name="addr_line1_col")
+	private String line1;
+	
+	@Column(name="addr_line2_col")
+	private String line2;
+	
+	@Column(name="addr_city_col")
+	private String city;
+	
+	@Column(name="addr_state_col")
+	private String state;
+	
+	@Column(name="addr_country_col")
+	private String country;
+	
+	@Column(name="addr_pincode_col")
+	private Long pincode;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getLine1() {
+		return line1;
+	}
+
+	public void setLine1(String line1) {
+		this.line1 = line1;
+	}
+
+	public String getLine2() {
+		return line2;
+	}
+
+	public void setLine2(String line2) {
+		this.line2 = line2;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public Long getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(Long pincode) {
+		this.pincode = pincode;
+	}
+	
+}
+------------------------------------------
+company
+---------------------
+package in.sandip.entity;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicUpdate;
+@Entity
+@Table(name="company_tab")
+@DynamicUpdate
+public class Company {
+	
+	@Id
+	@Column(name="com_id_col")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	@Column(name="com_name_col")
+	private String name;
+	
+	@Column(name="com_regid_col")
+	private String cregId;
+	
+	@Column(name="com_type_col")
+	private String ctype;
+	
+	@Column(name="com_parent_col")
+	private String parentOrg;
+	
+	@Column(name="com_mode_col")
+	private String modeOfOperate;
+	
+	@Column(name="com_service_code_col")
+	private String serviceCode;
+	
+	
+	@OneToOne(
+			cascade = CascadeType.ALL,
+			fetch = FetchType.EAGER)
+	@JoinColumn(name="aidFk")
+	private Address addr;//HAS-A
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getCregId() {
+		return cregId;
+	}
+
+
+	public void setCregId(String cregId) {
+		this.cregId = cregId;
+	}
+
+
+	public String getCtype() {
+		return ctype;
+	}
+
+
+	public void setCtype(String ctype) {
+		this.ctype = ctype;
+	}
+
+
+	public String getParentOrg() {
+		return parentOrg;
+	}
+
+
+	public void setParentOrg(String parentOrg) {
+		this.parentOrg = parentOrg;
+	}
+
+
+	public String getModeOfOperate() {
+		return modeOfOperate;
+	}
+
+
+	public void setModeOfOperate(String modeOfOperate) {
+		this.modeOfOperate = modeOfOperate;
+	}
+
+
+	public String getServiceCode() {
+		return serviceCode;
+	}
+
+
+	public void setServiceCode(String serviceCode) {
+		this.serviceCode = serviceCode;
+	}
+
+
+	public Address getAddr() {
+		return addr;
+	}
+
+
+	public void setAddr(Address addr) {
+		this.addr = addr;
+	}
+	
+}
+-----------------------------------------------------------------------------------
+User Defined exception
+1)CompanyNotFoundException
+
+public class CompanyNotFoundException extends RunTimeExeception 
+//java.lang.RunTimeException :-It is the super class of exception.
+----------------------------------------------------------------------------------------------------------------------
+CompanyNotFoundException.java
+--------------------------------------------------------
+package in.sandip.exception;
+
+public class CompanyNotFoundException extends RuntimeException {
+
+		public CompanyNotFoundException() {
+		super();
+	}
+	
+	public CompanyNotFoundException(String message) {
+		super(message);
+	}
+}
+--------------------------------------------
+ErrorMessage.java
+------------------------------------
+String DateTime;
+String message;
+int status;
+String code;
+--------------------------------------------------------------------------------------
+CompanyExceptionHandler.java
+------------------------------------------------
+@ExceptionHandler(CompanyNotFoundException.class)
+	public ResponseEntity<ErrorMesage> handleCompanyNotFoundException(
+			CompanyNotFoundException cnfe)
+	{
+		return ResponseEntity.internalServerError().body(
+				new ErrorMesage(
+						new Date().toString(), 
+						cnfe.getMessage(), 
+						HttpStatus.INTERNAL_SERVER_ERROR.value(), 
+						HttpStatus.INTERNAL_SERVER_ERROR.name()
+						)
+				
+				);
+
+--------------------------------------------------------------------------------------------------------------------------
+repository
+----------------
+package in.sandip.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import in.sandip.entity.Company;
+
+public interface CompanyRepository extends JpaRepository<Company, Long> {
+
+}
+---------------------------------------------------------------
+package in.sandip.service;
+
+import java.util.List;
+
+import in.sandip.entity.Company;
+
+public interface ICompanyService {
+
+	Long createCompany(Company cob);
+	void updateCompany(Company cob);
+	Company getOneCompany(Long id);
+	List<Company> getAllCompanies();
+}
+---------------------------------------------------------------
+package in.sandip.service.impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import in.sandip.entity.Company;
+import in.sandip.exception.CompanyNotFoundException;
+import in.sandip.repo.CompanyRepository;
+import in.sandip.service.ICompanyService;
+
+@Service
+public class CompanyServiceImpl implements ICompanyService {
+
+	@Autowired
+	private CompanyRepository repo;
+	
+	@Override
+	public Long createCompany(Company cob) {
+		return repo.save(cob).getId();
+	}
+
+	@Override
+	public void updateCompany(Company cob) {
+		if(cob.getCregId()!=null && repo.existsById(cob.getId()))
+			repo.save(cob);
+	}
+
+	@Override
+	public Company getOneCompany(Long id) {
+		Optional<Company> opt = repo.findById(id);
+		if(opt.isEmpty()) {
+			throw new CompanyNotFoundException("Given '"+id+"' Not exist");
+		} else {
+			return opt.get();
+		}
+	}
+
+	@Override
+	public List<Company> getAllCompanies() {
+		return repo.findAll();
+	}
+
+}
+-------------------------------------------------------------------
+controller
+------------------------------
+package in.sandip.rest;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import in.sandip.entity.Company;
+import in.sandip.exception.CompanyNotFoundException;
+import in.sandip.service.ICompanyService;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RestController
+@RequestMapping("/company")
+public class CompanyRestController {
+
+	@Autowired
+	private ICompanyService service;
+
+	//1. create company
+	@PostMapping("/create")
+	public ResponseEntity<String> createCompany(
+			@RequestBody Company company
+			) 
+	{
+			ResponseEntity<String> response = null;
+		try {
+			Long id = service.createCompany(company);
+			response = ResponseEntity.ok("CREATED WITH ID : "+ id);
+					} catch (Exception e) {
+			e.printStackTrace();
+					}
+				return response;
+	}
+
+	//2. fetch all
+	@GetMapping("/all")
+	public ResponseEntity<List<Company>> getAllCompanies() {
+		ResponseEntity<List<Company>> response = null;
+				try {
+			List<Company> list = service.getAllCompanies();
+			response = ResponseEntity.ok(list);
+				} catch (Exception e) {
+			e.printStackTrace();
+					}
+				return response;
+	}
+
+	//3. fetch one
+	@GetMapping("/fetch/{id}")
+	public ResponseEntity<Company> getOneCompany(
+			@PathVariable Long id
+			)
+	{
+		ResponseEntity<Company> response = null;
+			try {
+			Company cob = service.getOneCompany(id);
+			response = ResponseEntity.ok(cob);
+					} catch (CompanyNotFoundException e) {
+			//e.printStackTrace();
+					throw e;
+		}
+			return response;
+	}
+
+	
+}
+--------------------------------------------------------------------------------------
+Customer ----consumer
+--------------------------------------
+entity-----customer
+--------------------------------
+package in.sandip.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="cust_tab")
+public class Customer {
+
+	@Id
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE) //for oracle
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //for mysql
+	@Column(name="cust_id_col")
+	private Long id;
+	
+	@Column(name="cust_name_col")
+	private String name;
+	
+	@Column(name="cust_email_col")
+	private String email;
+	
+	@Column(name="cust_gender_col")
+	private String gender;
+	
+	@Column(name="cust_img_col")
+	private String imagePath;
+	
+	@Column(name="cust_mob_col")
+	private String mobile;
+	
+	@Column(name="cust_addr_col")
+	private String address;
+	
+	@Column(name="cust_pan_col")
+	private String panCardId;
+	
+	@Column(name="cust_aadhar_col")
+	private String aadharId;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPanCardId() {
+		return panCardId;
+	}
+
+	public void setPanCardId(String panCardId) {
+		this.panCardId = panCardId;
+	}
+
+	public String getAadharId() {
+		return aadharId;
+	}
+
+	public void setAadharId(String aadharId) {
+		this.aadharId = aadharId;
+	}
+}
+------------------------------------------------------------------------------------------------------------
+package in.sandip.exception;
+
+public class CustomerNotFoundException extends RuntimeException {
+
+	private static final long serialVersionUID = 1L;
+	
+	public CustomerNotFoundException() {
+		super();
+	}
+	
+	public CustomerNotFoundException(String message) {
+		super(message);
+	}
+
+}
+--------------------------------------------
+ErrorMessage.java
+-------------------------------
+package in.sandip.payload.response;
+public class ErrorMesage {
+	private String dateTime;
+	private String message;
+	private int status;
+	private String code;
+	public String getDateTime() {
+		return dateTime;
+	}
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public ErrorMesage(String dateTime, String message, int status, String code) {
+		super();
+		this.dateTime = dateTime;
+		this.message = message;
+		this.status = status;
+		this.code = code;
+	}
+	public ErrorMesage() {
+		super();
+	}	
+}
+---------------------------------------------------------------------------------------------
+ 
+package in.sandip.handler;
+
+import java.util.Date;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import in.sandip.exception.CustomerNotFoundException;
+import in.sandip.payload.response.ErrorMesage;
+
+@RestControllerAdvice
+public class CustomExceptionHandler {
+
+	/**
+	 * If CustomerNotFoundException is thrown from any RestController
+	 * then below method is executed and Returns Error Message with 500 Status code.
+	 * It is like a Reusable Catch block code.
+	 */
+	@ExceptionHandler(CustomerNotFoundException.class)
+	public ResponseEntity<ErrorMesage> handleCustomerNotFoundException(
+			CustomerNotFoundException cnfe)
+	{
+		return ResponseEntity.internalServerError().body(
+				new ErrorMesage(new Date().toString(),cnfe.getMessage(), 
+						HttpStatus.INTERNAL_SERVER_ERROR.value(), 
+						HttpStatus.INTERNAL_SERVER_ERROR.name()
+						)
+				
+				);
+	}
+}
+----------------------------------------------------------------------------
+repository
+----------------
+package in.sandip.repo;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import in.sandip.entity.Customer;
+
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+
+	Optional<Customer> findByEmail(String email);
+	Optional<Customer> findByAadharId(String aadharId);
+	Optional<Customer> findByPanCardId(String panCardId);
+	Optional<Customer> findByMobile(String mobile);
+}
+-------------------------------------------------------------------------------------------------
+package in.sandip.service;
+
+import java.util.List;
+
+import in.sandip.entity.Customer;
+
+public interface ICustomerService {
+
+	Long saveCustomer(Customer cust);
+	Customer getOneCustomer(Long id);
+	Customer getOneCustomerByEmail(String email);
+	Customer getOneCustomerByPanCard(String panCard);
+	Customer getOneCustomerByMobile(String mobile);
+	Customer getOneCustomerByAadhar(String aadhar);
+	
+	List<Customer> getAllCustomers();
+}
+----------------------------------------------------------------------------------------
+serviceImpl
+-------------------------------
+package in.sandip.impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import in.sandip.entity.Customer;
+import in.sandip.exception.CustomerNotFoundException;
+import in.sandip.repo.CustomerRepository;
+import in.sandip.service.ICustomerService;
+
+@Service
+public class CustomerServiceImpl implements ICustomerService {
+
+	@Autowired
+	private CustomerRepository repo;
+
+	public Long saveCustomer(Customer cust) {
+		return repo.save(cust).getId();
+	}
+
+	public Customer getOneCustomer(Long id) {
+		Optional<Customer> opt = repo.findById(id);
+		return validateInput(opt, id.toString());
+	}
+
+	public Customer getOneCustomerByEmail(String email) {
+		Optional<Customer> opt = repo.findByEmail(email);
+		return validateInput(opt, email);
+	}
+
+	public Customer getOneCustomerByPanCard(String panCard) {
+		Optional<Customer> opt = repo.findByPanCardId(panCard);
+		return validateInput(opt, panCard);
+	}
+
+	public Customer getOneCustomerByMobile(String mobile) {
+		Optional<Customer> opt = repo.findByMobile(mobile);
+		return validateInput(opt, mobile);
+	}
+
+	public Customer getOneCustomerByAadhar(String aadhar) {
+		Optional<Customer> opt = repo.findByAadharId(aadhar);
+		return validateInput(opt, aadhar);
+	}
+
+	public List<Customer> getAllCustomers() {
+		return repo.findAll();
+	}
+	
+	private Customer validateInput(Optional<Customer> opt,String input) {
+		/*if (opt.isEmpty()) {
+			throw new CustomerNotFoundException("Customer '" + input + "' not found");
+		} else {
+			return opt.get();
+		}*/
+		//JDK 1.8
+		return opt.orElseThrow(
+				()-> new CustomerNotFoundException(
+						"Customer '" + input + "' not found")
+				);
+	}
+	
+
+}
+---------------------------------------------------------------------------------------------------
+RestController
+-----------------------
+package in.sandip.rest;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import in.sandip.entity.Customer;
+import in.sandip.exception.CustomerNotFoundException;
+import in.sandip.service.ICustomerService;
+
+@RestController
+@RequestMapping("/customer")
+public class CustomerRestController {
+
+	@Autowired
+	private ICustomerService service;
+	
+	//1. save customer
+	@PostMapping("/create")
+	public ResponseEntity<String> createCustomer(@RequestBody Customer customer)
+	{
+		ResponseEntity<String> response = null;
+		
+		Long id = service.saveCustomer(customer);
+		response = ResponseEntity.ok("Customer '"+id+"' Created!");
+		
+		return response;
+	}
+	
+	//2. fetch all customers
+	@GetMapping("/all")
+	public ResponseEntity<List<Customer>> getAllCustomers() {
+		ResponseEntity<List<Customer>> response  = null;
+		List<Customer> list = service.getAllCustomers();
+		response = ResponseEntity.ok(list);
+		return response;
+	}
+	
+	
+	//3. fetch one customer by email
+	@GetMapping("/find/{mail}")
+	public ResponseEntity<Customer> getOneCustomerByEmail(@PathVariable String mail) 
+	{
+		ResponseEntity<Customer> response = null;
+		try {
+			Customer cust = service.getOneCustomerByEmail(mail);
+			response = new ResponseEntity<Customer>(cust,HttpStatus.OK);
+		} catch (CustomerNotFoundException cnfe) {
+			cnfe.printStackTrace();
+			throw cnfe;
+		}
+		return response;
+	}
+	
+	//4. fetch one customer by pancard
+	//5. fetch one customer by aadharId
+	//6. fetch one customer by mobile
+	
+}
+----------------------------------------customer------------------------------------------
+get---http://192.168.43.76:9920/customer/all
+-------------------------------------------------------------------------
+[{"id":1,"name":"sandip","email":"sandip@gmil.com","gender":"Male","imagePath":"c:/abc.jpg","mobile":"7766554433","address":"Bangalore","panCardId":"AJVP1222A","aadharId":"7788665599"}]
+-----------------------------------------------------------------------------------------------------
+http://192.168.43.76:9920/customer/find/sandip@gmil.com
+------------------------------------------------------------------------------------
+{"id":1,"name":"sandip","email":"sandip@gmil.com","gender":"Male","imagePath":"c:/abc.jpg","mobile":"7766554433","address":"Bangalore","panCardId":"AJVP1222A","aadharId":"7788665599"}
+-----------------------------------------------------Company------------------------------------------------
+http://192.168.43.76:9901/company/all
+--------------------------------------------------------------
+[{"id":1,"name":"Amazon","cregId":"101","ctype":"product based","parentOrg":"ABC","modeOfOperate":"online","serviceCode":"1001","addr":{"id":1,"line1":"10","line2":"20","city":"Bangalore","state":"Karnataka","country":"India","pincode":560012}}]
+----------------------------------------------------------------------------------------------------
+http://192.168.43.76:9901/company/fetch/1
+------------------------------------------------------------------
+{"id":1,"name":"Amazon","cregId":"101","ctype":"product based","parentOrg":"ABC","modeOfOperate":"online","serviceCode":"1001","addr":{"id":1,"line1":"10","line2":"20","city":"Bangalore","state":"Karnataka","country":"India","pincode":560012}}
+-----------------------------------------------------------------------------------------------------
+Config Server
+-----------------------
+we are mentaining application.properties for each Micro-services.
+In that place we can maintain a common application.properties in the git Repository(paid).Native Repository.
+we have to create a config server like eureka server and in its application.properties we can give the path of the file stored in the git Repository or in the local file system.
+---------------------------------------------------------------------------------------------------------------
+we have to start executing in this order.
+1)config server
+2)Eureka server
+3)Company Micro-service
+4)Customer Micro-service.
+ 
+----------------------------------------------------------------------------------------------------------------------
+
+1)Config Server is used to store common key-value pairs as a properties file for all Microservices.
+2)No need of writing same/duplicate key-values in multiple microservices.
+3)Modify of key-value will be easy .we neednot modify at multiple places.
+4)The concept is used for common key-value and not for all key-value.
+----------------------------------------------------------------------------------------------------------------
+They are 2 types 
+1)External config server:- The properties files are stored in the github and link is provided in the config server properties files.
+2)Native Config server:-we place it inside the project or inside a drive location.
+3)The default port no is 8888.
+4)It is also registered with eureka server.
+5)Config server also has a properties file where the common application properties are stored.
+--------------------------------------------------------------------------------------------------
+config server to add the dependency we use.
+----------------------------------------------------------
+<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
+</dependency>
+
+----------------------------------------------------------------
+In the main class we have to use the stereotype anotation
+@EnableConfigServer
+---------------------------------------------------------------------------------------------------------------------------------
+Actuator:-
+It is used to check the health and info of each microservice.
+health is the basic details of the microservice.
+info:- It is the key-value information
+project name:,version,author,client,.....etc.
+---------------------------------------------------------------------------------------------------------------
+To Enable the details of the micro-services
+-----------------------------------------------------------
+management.endpoints.web.exposure.include=*
+------------------------------------------------------------
+http://localhost:8080/actuator/default
+http://localhost:8080/actuator/beans
+http://localhost:8080/actuator/configprops
+http://localhost:8080/actuator/env
+------------------------------------------------------------------------------------------------------
+ConfigServer +Actuator
+------------------------------------
+Example-1
+---------------------
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.config.server.EnableConfigServer;
+
+@SpringBootApplication
+@EnableConfigServer
+public class SpringCloudConfigServerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringCloudConfigServerApplication.class, args);
+	}
+
+}
+-----------------------------------------------------------------------------
+application.properties
+-------------------------------------
+server.port=9999
+spring.profiles.active=native
+### classpath=src/main/resources
+spring.cloud.config.server.native.search-locations=classpath:/my-config
+-------------------------------------------------------------
+my-config------>application.properties
+---------------------------------------------------------------
+title=Marlabs Students
+--------------------------------------------------------------------------------------------------------
+Message Queues
+-----------------------------------------
+Message Queues is use to send data from one system(application) to another system (application) in continuous flow.
+Or in a periodical interval there should be updatation or refreshing of browser.
+These may be common or it may be personal.
+Example:-
+1)Live Train Status.--Common 
+2)Food Delivery status--Personal
+3)Stock market update--Common
+4)Cricket score details--Common
+* Common thinks will be broadcasted from server to personal devices.
+
+There will be one consumer and one producer or There may be multiple consumer and one producer.
+*Don't consider whatsup and mobile messenger .
+
+The producer will send a message .There will be a middleware known as MOM (Message Oriented Middleware).
+it will have a memory block where the message is stored .It is also known as Destination.
+It send the data or broadcast the data to the consumer.
+
+The single consumer uses Peer to peer communication.The destination type is known as Queue.
+The mutiple consumer user Pub/Sub Communication .The destination type is known as Topic.
+
+JMS (Java message service)
+---------------------------------------------------------------------------------
+1)It uses TCP protocol.
+2)Data sender is called as Producer,data receiver is called as consumer.
+3)Producer and consumer will communicate using MOM.
+Mediator software :- Apache ActiveMQ.
+
+4)JMS supports two types of communication.
+a)peer-to-peer communication(single consumer)
+b)publish and subscribe (pub/sub) communication.(multiple consumer)
+
+-------------------------------------------------------------------------------------------------
+MOM contains one destination that holds messages given by Producer app.
+a)Queue Destination for P2P communication.
+b)Topic Destination for Pub/Sub Communication.
+-------------------------------------------------------------------------------------
+
+step 1:- MOM setup
+https://activemq.apache.org/components/classic/download/
+step 2:-
+apache-activemq-5.16.4-bin.zip
+step 3:-
+upzip it.
+apache-activemq-5.16.4-bin
+step 4:-
+goto to bin ------>win64----->activemq.bat---->double click to start .
+step 5:- 
+http://127.0.0.1:8161
+step 6:-
+username:admin
+password:admin
+
+step 6:-to close this goto activemq.bat 
+ctrl+c
+do you want to exit --press y
+---------------------------------------------------------------------
+spring:-
+-----------------------
+@Configuration
+public class AppConfig{
+@Bean
+public ConnectionFactory conn()
+{
+ActiveMQConnectionFactory cf=new ActiveMQConnectionFactory();
+cf.setBrokerURL("tcp://localhost:61616");
+cf.setUserName("admin");
+cf.setPassword("admin");
+return cf;
+}
+@Bean
+public JmsTemplate jms()
+{
+JmsTemplate jt=new JmsTemplate();
+jt.setConn(conn());
+return jt;
+}
+
+
+springBoot:-Example-1
+step 1:-MessageSender/producer part:-
+---------------
+application.properties
+-----------------------------------
+spring.activemq.broker-url=tcp://localhost:61616
+spring.activemq.user=admin
+spring.activemq.password=admin
+spring.jms.pub-sub-domain=false
+my.mq.desti-name=sample
+------------------------------------------------------------------------------
+step 2:-
+MessageSender/producer part:-
+------------------------------------------------------
+file->spring startup project.
+1)main file
+2)CommandLineRunner
+------------------------------Producer Part----------------------------------------------------------------------------
+@Component
+public class MessageSender implements CommandLineRunner
+{
+@Autowired
+private JmsTemplate jt;
+@Value("${my.mq.desti-name}")
+private String destinationName;
+
+@Override
+public void run(String... args)throws Exception
+{
+jt.send(destinationName,ses -> ses.createTextMessage("Hello from producer->"+new Date()));
+}
+}
+-----------------------------------------------------------------------------------------------
+
+Consumer part:-
+----------------------------
+step 1:-
+application.properties
+-----------------------------------------------------------------------------
+spring.activemq.broker-url=tcp://localhost:61616
+spring.activemq.user=admin
+spring.activemq.password=admin
+spring.jms.pub-sub-domain=false
+my.mq.desti-name=sample
+----------------------------------------------------------------------------
+step 2:-
+----------------
+file->spring startup project.
+1)main file
+2)CommandLineRunner
+@Component
+public class MessageReader
+{
+@JmsListener(destination="sample")
+public void readMsg(String message)
+{
+System.out.println("Data at consumer -->"+message);
+}
+}
+------------------------------------------------------------------------------------
+pom.xml
+------------------------------------------------------------------
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-activemq</artifactId>
+		</dependency>
+-------------------------------------------------------------
+Example 2:-
+
+step 1:-
+@EnableScheduling
+step 2:-
+Make change in the message sender only.
+previous:-
+---------------------
+@Override
+public void run(String... args)throws Exception
+{
+jt.send(destinationName,ses -> ses.createTextMessage("Hello from producer->"+new Date()));
+}
+-------------------------------
+ current
+---------------
+@Scheduled(cron = "0 4 10 * * *")
+public void send()
+{
+jt.send(destinationName,ses -> ses.createTextMessage("Hello from scheduled producer->"+new Date()));
+}
+--------------------------------------------------------------------------------------------------------------
+https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=csharp
+----------------------------------------------------------------------------------------------------------------------
+	@Scheduled(cron = "0 */1 * * * *")
+
+----------------------------------------------------------------------------------------------------------------------------------
+Circuit Breaker
+----------------------------
+It is use to handle the error .If the error occur then it will jump to FallBack().
+In case of multiple microservices one microservice will try to communicate with another microservice.such communication link is called circuit.
+close circuit :- It is called closed circuit when the communication is over.But there may be again communication in futer.
+The circuit is connected .
+open circuit:-The connection is broken.There may be an error between the communication.
+---------------------------------------------------------------------------------------------------------------------------------
+We have a tool called Hystrix which will try to communicate between the 2 microservices.
+It try to close the circuit.but if the error exist then the circuit remains open.
+-------------------------------------------------
+Hystrix is a tool of Netflix.
+-----------------------------------------------
+The common properties is stored in the 
+https://github.com/Netflix/Hystrix/wiki/Configuration#circuitBreaker.requestVolumeThreshold
+---------------------------------------------------------------------------------------------------------------------
+we can use within the controller:-
+-----------------------------------------------
+@RestController
+@RequestMapping("/payment")
+public class PaymentRestController
+{
+@GetMapping("/pay")
+@HystrixCommand(fallbackMethod = "doPaymentFallBack",
+						commandProperties={
+		@HystrixProperty(name="circuitBreaker.requestVolumeThreshold",value="5"),
+@HystrixProperty(name="circuitBreaker.sleepWindowInMilliseconds",value="60000")})
+
+public String doPayment()
+{
+system.out.println("from actual service");
+if(new Random().nextInt(9)<10)
+{
+throw new RuntimeException("Pin incorrect");
+}
+}
+
+
+public String doPaymentFallBack()
+{
+System.out.println("from fallback service");
+return "Please try after sometimes";
+}
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+Spring Security
+--------------------------------------------
+Airline reservation system
+--------------------------------------------------------------
+Eureka server,ConfigServer---common application.properties.,Feign Client-----Microservices dependency(producer and consumer),actuator to see the health and info of the microservices.
+---------------------------------------------------------------
+Spring Boot,Mqsql/Oracle
+-----------------------------------------------------------------
+Afreenbanu
+Trupti
+Shubham
+Rohit
+Mohit
+---------------------------------------------------------------------------------
+Madhau
+Deelep
+Geetanjali
+Amajad
+shohaib
+Shilpa
+Kalle
+-----------------------------------------------------------------
+Table :-
+------------------------Producer-------------------------------
+1)Registration of customer ---(about customer details) regno,customer name,age,address,searchCustomerById()
+2)Flight Details--------(about flight details) flightno,indigo,source,destination,price,searchFlightById()
+-----------------Consumer-------------------------------------------------
+3)Search flight------depending upon the flight details.-------------------searchFlightById()
+4)Book Ticket-------Depending on Registration (customer registration available +flight details available or not)
+5)Flight Boarding -------Depending on Book Tickets(time,date,customerbooking id,flight id---flight details)
+------------------------------------------------------------------------------------------------------------------------------------------------
+SpringBoot Security
+---------------------------------
+InMemory AuthenticationManager(RAM)
+--------------------------------------------------
+username | Password  | authorities 
+-----------------------------------------------
+sandip	|1234		| admin
+shubham| 1234		|employee
+Madhu	|1234		|student
+----------------------------------------------------------------
+example code:-
+-----------------------
+auth.inMomoryAuthentication().withUser("sandip").password("{noop}1234").authorities("ADMIN");
+auth.inMomoryAuthentication().withUser("shubham").password("{noop}1234").authorities("EMPLOYEE");
+auth.inMomoryAuthentication().withUser("Madhu").password("{noop}1234").authorities("STUDENT");
+-------------------------------------------------------------------
+URL    		| 	UI 						| Access Details
+--------------------------------------------------------------------------
+/home			homepage.html			permitall
+/welcome		welcome.html			only login users.
+/admin			adminpage.html			only admin
+/emp			employeepage.html		only employee
+/std				studentpage.html			only student
+
+------------------------------------------------------------------------------------------
+antMatchers(path)  :- This method is uesd to match/compare request URL path.
+and display the UI and then display the login page to give permission.
+example:-
+.antMatchers("/show").permitAll()
+.antMatchers("/export").permitAll()
+.antMatchers("/save").hasAuthority("ADMIN");
+-----------------------------------------------------------
+http.authorizeRequests()
+.antMatchers("/home").permitAll()
+.antMatchers("/welcome").authenticated()
+.antMatchers("/admin").hasAuthority("ADMIN")
+.antMatchers("/emp").hasAuthority("EMPLOYEE")
+.antMatchers("/std").hasAuthority("STUDENT")
+-------------------------------------------------------------
+loginForm provided by spring
+-------------------------------------------------
+login form details
+-------------------------------
+.and()
+.formLogin()
+.defaultSuccessURL("/welcome",true)
+---------------------------------------------------------------------
+logout form details
+-------------------------------
+.and()
+.logout()
+.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+-----------------------------------------------------------------------------------------------
+//exception Details
+-------------------------------
+.and()
+.exceptionHandling()
+.accessDeniedPage("/denied")
+---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

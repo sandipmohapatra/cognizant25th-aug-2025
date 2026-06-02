@@ -1,0 +1,2918 @@
+steps to create a react application
+---------------------------------------------------
+step1:- create a folder
+
+step 2:- npm create vite@latest my-app --template react
+
+step 3:- create-react-app my-app
+
+step 4:-cd my-app
+
+step 5:-npm start
+-----------------------------------Browser------------------------
+step 6:-localhost:3000
+----------------------------------------------------------------------
+automatically the 
+1)app.js
+2)app.css are created .modify these files according to your requirements.
+3)node_module is created .It contains the library file.
+4)index.html 
+5)package.json :- it conatins the library versions installed.
+6)main.js
+-----------------------------------------------------------------------------
+React Components
+- A component comprises of
+a) Presentation
+b) Styles
+c) Logic
+- Presentation is done by using HTML
+- Styles are defined by using CSS
+- Logic is defined by using JavaScript | JSX | TypeScript
+- It is a reusable design with functionality.
+- It provides customizable designs.
+- Components are building blocks for application.
+- React component can be
+a) A function
+b) A class
+--------------------------------------------------------------------------------------------------------
+Function Component vs Class Component
+Class Component
+- It is statefull component.
+- It have implicit state configured.
+- It is easy to extend.
+- It provides various mutable techniques which are easy for desinging a reusable template.
+- Properties and Methods
+- Accessors with will fine control over the properties in class.
+- It uses more memory.
+- It is slow in rendering.
+- It is complex in configurations.
+- It uses lot of dependencies.
+------------------------------------------------------------------------------------------------------------
+Function Components:
+- It is stateless component.
+- You have use state explicitly.
+- A function provides all immutable members, however you can use state for making it mutable.
+- Hard to extend
+- It is faster
+- It uses less memory
+- It is modular.
+- It provides various built-in hooks.
+
+----------------------------------------------------------------------------------------------------------
+example-1
+-----------------------
+app.js
+------------------------
+import React, {Component} from 'react';
+import './App.css';
+
+class App extends Component
+{
+render()
+{
+  return(
+<div className='App'>
+<h1>Hello Welcome to React JS</h1><hr></hr>
+<table>
+<tr><td>Enter your Name</td><td><input type="text" name="t1" size="20"/></td></tr>
+<tr><td>Enter your Address</td><td><input type="text" name="t2" size="20"/></td></tr>
+<tr><td>Enter your Phoneno</td><td><input type="text" name="t3" size="20"/></td></tr>
+<tr><td>Enter your Email</td><td><input type="text" name="t4" size="20"/></td></tr>
+<tr><td></td><td><input type="submit" value="submit"/></td></tr>
+</table>
+<h2>The sum is {12+5}</h2>
+<h2>The subtraction {12-5}</h2>
+<h2>The multipliaction {12*5}</h2>
+<h2>The division is {12 / 6}</h2>
+
+</div>
+  );
+}
+}
+
+export default App;
+--------------------------------------------------------------------------------------------------------------
+app.css
+---------------
+h1{
+  color:red;
+}
+----------------------------------------------
+to see the o/p:- localhost:3000
+-------------------------------------------------
+Features of React
+--------------------------
+1)JSX
+2)Components
+3)One-way Data Binding
+4)Virtual DOM
+5)performance
+6)simplicity
+----------------------------------------------
+1)JSX stands for javascript XML. It is a Javascript with XML and HTML syntax.
+This syntax is processed into javascript and called Rect Framework.
+
+2)ReactJs is all about components.React Js application is made of multiple components,and each component has its own logic and controls.
+ 
+why we are using JSX
+1)It is faster than regular javascript .
+2)Instead of separating technologies by putting markup and logic in separate files,react uses components that contain both.
+3)it is type-safe and errors are found at compilation time.
+
+
+import React, {Component} from 'react';
+class App2 extends Component
+{
+render()
+{
+return(
+<div>
+<h1>Welcome to ReactJs</h1>
+<h2>Welcome to ReactJs</h2>
+<p>Welcome to ReactJs on Sunday</p>
+<p>The sum of 2 nos :- </p><p>{25+24}</p>
+
+</div>
+);
+}
+}
+export default App2;
+---------------------------------------------------------------------
+
+example-2
+-------------------
+import React, {Component} from 'react';
+import './App.css';
+
+class App1 extends Component
+{
+render()
+{
+  return(
+<div>
+<h1>Hello Welcome to React JS</h1><hr></hr>
+<table>
+<tr><td>Enter your Name</td><td><input type="text" name="t1" size="20"/></td></tr>
+<tr><td>Enter your Address</td><td><input type="text" name="t2" size="20"/></td></tr>
+<tr><td>Enter your Phoneno</td><td><input type="text" name="t3" size="20"/></td></tr>
+<tr><td></td><td><input type="submit" value="submit"/></td></tr>
+</table>
+</div>
+  );
+}
+}
+
+export default App1;
+--------------------------------------------------------------
+example-3
+------------------
+import React, {Component} from 'react';
+class App2 extends Component
+{
+render()
+{
+return(
+<div>
+<h1>Welcome to ReactJs</h1>
+<h2>Welcome to ReactJs</h2>
+<p>Welcome to ReactJs on Sunday</p>
+<p>The sum of 2 nos :- </p><p>{25+24}</p>
+
+</div>
+);
+}
+}
+export default App2;
+----------------------------------------------------------------
+example-4
+---------------------
+import React from 'react';
+class App3 extends React.Component
+{
+    render()
+    {
+        var a=prompt("Enter a number");
+        var b=prompt("Enter a number");
+        return (
+<div>
+<h1>The sum is :{parseFloat(a)+parseFloat(b)}</h1>
+<h1>The sub is :{parseFloat(a)-parseFloat(b)}</h1>
+<h1>The mul is :{parseFloat(a)*parseFloat(b)}</h1>
+<h1>The div is :{parseFloat(a)/parseFloat(b)}</h1>
+</div>
+       );
+   
+    }
+}
+export default App3;
+----------------------------------------------
+index.js
+---------------
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import App1 from './App1';
+import App2 from './App2';
+import App3 from './App3';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+<div><App/><App1/><App2/><App3/></div>
+  </React.StrictMode>
+);
+reportWebVitals();
+
+----------------------------------------------------------------------------------------
+example-5
+---------------------
+inline css example
+------------------------------
+import React, {Component} from 'react';
+class App4 extends Component
+{
+render()
+{
+ var mystyle={
+    fontSize:20,
+    color:'green'
+}
+  return(
+    <div>
+<h3 style ={mystyle}>Welcome to ReactJs </h3>
+<h3 style ={mystyle}>Welcome to ReactJs on Weekend Batch</h3>
+    </div>
+  );
+}
+}
+
+export default App4;
+--------------------------------------------
+example-6
+--------------------
+import React,{Component} from 'react';
+class App extends Component{
+  render(){
+    return(
+    <div>
+<h1 className="MyReact">{35+56}</h1>
+
+    </div>
+    );
+  }
+}
+
+export default App;
+--------------------------------------------------
+React Component
+---------------------------------
+Every react component is a core building block of the react application.
+Every react component have their own structure ,methods as well as APIs.
+They can be reused as per requirement.
+ Here root is the starting component, and each of the other pieces becomes branches which are further divided into sub branches.
+
+There are two types of components in react.
+1)functional component:- It is also known as stateless component because they do not hold or manage state.
+2)class component:- They are more complex than functional components.It is required to extend from React.Component.
+we can create a class by defining a class that extends component and has a render function.
+The class component is also known as stateful component  because that can hold or manage the local state.
+------------------------------------------------------------------------------
+example-7
+----------------
+import React,{ Component } from 'react';
+import './App.css';
+class App extends React.Component{
+  render(){
+    return(
+    <div>
+<h1><center>Example of class</center> </h1>
+<First/>
+<Second/>
+    </div>
+    );
+  }
+}
+class First extends React.Component{
+  render() {
+    return(
+<div>
+<h2>This is an example of First React class Component</h2>
+</div>
+    );
+  }
+}
+class Second extends React.Component{
+  render()  {
+    return(
+<div>
+<h2>This is an example of Second React class Component</h2>
+</div>
+    );
+  }
+}
+
+export default App;
+------------------------------------------------------------------
+The class component is also known as stateful component  because that can hold or manage the local state.
+state :-
+1)State can be changed and mutable.
+2)It cannot be accessed by child component.
+3)It cannot make component reusable.
+4)Stateless component cannot have state.
+props:-
+1)props are readonly and immutable
+2)It can be accesed by child component.
+3)It  make component reusable.
+4)Stateless component can have props.
+----------------------------------------------------------------------------------
+constructor():- It is a method used to initialize an object state in a class.It is automatically called during the creation of an object in a class.It is called before the component is mounted.
+---------------------------------------------------------------------------------------------------
+React Map :- it is  a collection type where data is stored in the form of pairs.It contains a unique key.The value stored in the map should be mapped to the key.It cannot store dupilcate pair in the map.It is used for storing and searching of data.
+---------------------------------------------------------------------------
+
+example-8
+----------------------
+import React, { Component } from 'react';  
+class App extends React.Component {  
+ constructor() {  
+      super();  
+      this.state = {  
+         data:   
+         [  { "name":"Akshya" ,"address":"Bangalore"},{"name":"Partiksha","address":"Bangalore"},{"name":"Sandip","address":"Bangalore"}]  
+      }  
+   }  
+   render() {  
+      return (  
+         <div>  
+            <StudentName/>  
+            <ul>            
+                {this.state.data.map((item) => <List data = {item} />)}           
+            </ul>  
+         </div>  
+      );  
+   }  
+}  
+class StudentName extends React.Component {  
+   render() {  
+      return (  
+         <div>  
+            <h1>Student Name Detail</h1>  
+         </div>  
+      );  
+   }  
+}  
+class List extends React.Component {  
+   render() {  
+      return (  
+         <ul>            
+            <li>{this.props.data.name} stays in {this.props.data.address}</li>   
+            
+         </ul>  
+      );  
+   }  
+}  
+
+export default App;  
+---------------------------------------------------------------------------
+
+Changing the state:-
+We can change the component state by using the setState() method and passing a new state object as the argument. Now, create a new method toggleDisplayBio() in the above example and bind this keyword to the toggleDisplayBio() method otherwise we can't access this inside toggleDisplayBio() method.
+--------------------------------------------------
+example of state
+Example-9
+------------------------------------------------
+import React, { Component } from 'react';
+
+class Counter extends Component {
+  constructor() {
+    super();
+    this.state = {
+      count: 0,
+    };
+  }
+
+  incrementCount() {
+    // To update the state, use this.setState()
+    this.setState({ count: this.state.count + 1 });
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={() => this.incrementCount()}>Increment</button>
+      </div>
+    );
+  }
+}
+
+export default Counter;
+-----------------------------------------------------------------------------------------------------------------------
+example-10
+---------------------
+import React, { Component } from 'react';  
+class App extends React.Component {  
+ constructor() {  
+      super();        
+      this.state = { 
+        displayMore: false ,
+           };  
+      console.log('Component To Display less or more', this);  
+
+      this.toggleDisplayMore = this.toggleDisplayMore.bind(this);  
+      }  
+      toggleDisplayMore(){  
+          this.setState({displayMore: !this.state.displayMore});  
+          }  
+      render() {  
+          return (  
+              <div>  
+                  <h1>Welcome to React Js This is an Example of State </h1>  
+                  {  
+                      this.state.displayMore ? (   
+                          <div>  
+                              <p><h4>This is an example of State.</h4></p>  
+                              <p><h4>ReactJs is one of the best Frontend Available in the market.</h4></p>  
+                              <button onClick={this.toggleDisplayMore}> Show Less </button>  
+                        </div>  
+                          ) : (  
+                              <div>  
+                                  <button onClick={this.toggleDisplayMore}> Read More </button>  
+                              </div>  
+                          )  
+                  }  
+             </div>  
+        )  
+    }  
+}  
+export default App;  
+--------------------------------------------------------------------------------------------------
+example-10
+-------------------------
+loops array in react
+------------------------------------------------
+import React from 'react';  
+     
+function App() {  
+     
+  const myArray = ['January', 'February', 'March', 'April', 'May','June'];  
+    
+  return (  
+    <div className="container">     
+        <h1> Example of React Map Loop </h1>  
+     
+        {myArray.map(name => (  
+          <li>  
+            {name}  
+          </li>  
+        ))}  
+     
+    </div>  
+  );  
+}  
+     
+export default App;  
+-----------------------------------------------------------------------------------
+example-11
+-------------------
+import React from 'react';  
+    
+function App() {  
+    
+ const students = [  
+              {  
+                'id': 1,   
+                'name': 'Jack',   
+                'email': 'jack@gmail.com'  
+              },  
+              {  
+                'id': 2,   
+                'name': 'Mary',   
+                'email': 'mary@gmail.com'  
+              },  
+              {  
+                'id': 3,   
+                'name': 'John',   
+                'email': 'john@gmail.com'  
+              },  
+          ];  
+    
+  return (  
+    <div className="container">  
+        <h1> Example of React Map Loop </h1>  
+     
+        <table className="table table-bordered">  
+            <tr>  
+                <th>ID</th>  
+                <th>Name</th>  
+                <th>Email</th>  
+            </tr>  
+    
+            {students.map((student, index) => (  
+              <tr data-index={index}>  
+                <td>{student.id}</td>  
+                <td>{student.name}</td>  
+                <td>{student.email}</td>  
+              </tr>  
+            ))}  
+    
+        </table>  
+    
+    </div>  
+  );  
+}  
+    
+export default App;  
+---------------------------------------------------------------------------------------------------------------------
+React Axios Delete Request Example
+------------------------------------------------------------------------------
+npm install axios
+------------------------------------------------
+Axios :- It is used for http delete request.We have to use the React library.It can build the interface which can send the http request from our application.
+--------------------------------------------------------------------------------------------------------------
+example-12
+-----------------------------------------------
+import React from 'react';  
+    
+import axios from 'axios';  
+    
+export default class PostList extends React.Component {  
+  state = {  
+    posts: []  
+  }  
+    
+  componentDidMount() {  
+    axios.get(`https://jsonplaceholder.typicode.com/posts`)  
+      .then(res => {  
+        const posts = res.data;  
+        this.setState({ posts });  
+      })  
+  }  
+    
+  deleteRow(id, e){  
+    axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)  
+      .then(res => {  
+        console.log(res);  
+        console.log(res.data);  
+    
+        const posts = this.state.posts.filter(item => item.id !== id);  
+        this.setState({ posts });  
+      })  
+    
+  }  
+    
+  render() {  
+    return (  
+      <div>  
+        <h1> Example of React Axios Delete Request </h1>  
+    
+        <table className="table table-bordered">  
+            <thead>  
+              <tr>  
+                  <th>ID</th>  
+                  <th>Title</th>  
+                  <th>Body</th>  
+                  <th>Action</th>  
+              </tr>  
+            </thead>  
+    
+            <tbody>  
+              {this.state.posts.map((post) => (  
+                <tr>  
+                  <td>{post.id}</td>  
+                  <td>{post.title}</td>  
+                  <td>{post.body}</td>  
+                  <td>  
+                    <button className="btn btn-danger" onClick={(e) => this.deleteRow(post.id, e)}>Delete</button>  
+                  </td>  
+                </tr>  
+              ))}  
+            </tbody>  
+    
+        </table>  
+      </div>  
+    )  
+  }  
+}  
+--------------------------------------------------------------------------------------------
+>npm install react-router-dom --save
+>npm install react-router-dom@v5 --save
+>npm i --save-dev @types/react-router-dom
+>npm install react-router-dom@6.0.0-beta.0
+--------------------------------------------------------------------------------------------------------------------------------------------
+Example-13
+-----------------------
+routing:- It is navigating to different pages.
+----------------------------------------------------------------
+home.jsx
+--------------------------
+import React,{ Component } from "react";
+
+class Home extends Component
+{
+render()
+{
+return(
+    <div>
+        <h1>Wwelcome to Home Page</h1>
+<table>
+<tr><td>Enter your Name</td><td><input type="text" name="t1" size="20"/></td></tr>
+<tr><td>Enter your Address</td><td><input type="text" name="t2" size="20"/></td></tr>
+<tr><td>Enter your Phoneno</td><td><input type="text" name="t3" size="20"/></td></tr>
+<tr><td></td><td><input type="submit" value="submit"/></td></tr>
+</table>
+
+    </div>
+);
+}}
+
+export default Home;
+-----------------------------------------------------------
+about.jsx
+-----------------------
+import React,{ Component } from "react";
+
+class About extends Component
+{
+render()
+{
+return(
+    <div>
+        <h1>welcome to About Page</h1>
+<table>
+<tr><td>Enter your Name</td><td><input type="text" name="t1" size="20"/></td></tr>
+<tr><td>Enter your Address</td><td><input type="text" name="t2" size="20"/></td></tr>
+<tr><td>Enter your Phoneno</td><td><input type="text" name="t3" size="20"/></td></tr>
+<tr><td></td><td><input type="submit" value="submit"/></td></tr>
+</table>
+
+    </div>
+);
+}}
+
+export default About;
+----------------------------------------------------------------
+topic.jsx 
+---------------------------
+import React,{ Component } from "react";
+
+class Topic extends Component
+{
+render()
+{
+return(
+    <div>
+    <h2>The Topics of  React.js are</h2>
+<ul>
+<li>Refs</li>
+<li>State</li>
+<li>Props</li>
+</ul>
+</div>
+);
+}}
+
+export default Topic;
+------------------------------------
+app.jsx
+------------------------
+import React,{ Component } from "react";
+import {BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Home from './Home';
+import About from './About';
+import Topics from './Topics';
+
+
+class App extends Component
+{
+render()
+{
+return(
+<Router>
+<div>
+<ul>
+<li><Link to="/">Home</Link></li>
+<li><Link to="/about">About</Link></li>
+<li><Link to="/topics">Topics</Link></li>
+</ul>
+<hr/>
+<Route exact path="/" component={Home}/>
+<Route exact path="/about" component={About}/>
+<Route exact path="/topics" component={Topics}/>
+</div>
+</Router>
+);
+}
+}
+export default App;
+-------------------------------------------------------------------------------------------------
+*class App2.js in index import App2.js in that class create the functional component.
+export default <function name>
+-----------------------------------------------------------------------------------------------------------------------
+Example-14
+------------------------------------
+import { useState } from "react";
+export function DataBinding()
+{
+const [userName] = useState("John");
+const [categories] = useState(["Electronics", "Footwear", "Fashion"]);
+const [products] = useState([{Name:"TV", Price:45000.33}, {Name:"Nike Casuals", Price:3200.44}]);
+return(
+<div className="container-fluid">
+<h2>State in React Function Component</h2>
+<p>Hello ! {userName}</p>
+<h2>Categories</h2>
+<ol>
+{
+categories.map((category)=>
+<li key={category}> {category} </li>
+)
+}
+</ol>
+<h2>Products Table</h2>
+<table className="table table-hover">
+<thead>
+<tr>
+<th>Name</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+{
+products.map((product)=>
+<tr key={product.Name}>
+<td>{product.Name}</td>
+<td>{product.Price}</td>
+</tr>
+)
+}
+</tbody>
+</table>
+</div>
+)
+}
+
+export default  DataBinding;
+---------------------------------------------------------------------------
+Example-15
+---------------------------
+import { useEffect, useState } from "react";
+export function NasaComponent()
+{
+const [mars, setMars] = useState({photos:[]});
+useEffect(()=>{
+fetch("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY&quot")
+.then(response=> response.json())
+.then(data=> {
+setMars(data);
+})
+},[])
+return(
+<div className="container-fluid">
+<h2>Mars Rover Photos </h2>
+<table className="table table-hover">
+<thead>
+<tr>
+<th>Photo Id</th>
+<th>Preview</th>
+<th>Camera Name</th>
+<th>Rover Name</th>
+</tr>
+</thead>
+<tbody>
+{
+mars.photos.map(item=>
+<tr key={item.id}>
+<td>{item.id}</td>
+<td>
+<a href={item.img_src} target="_blank"><img width="200" 
+height="200" src={item.img_src} /></a>
+</td>
+<td>
+{item.camera.full_name}
+</td>
+<td>
+{item.rover.name}
+</td>
+</tr>
+)
+}
+</tbody>
+</table>
+</div>
+)
+}
+export default NasaComponent
+---------------------------------------------
+Event Binding
+- Mouse Events
+- Touch Events
+
+
+                                    Keyboard Events
+--------------------------------------------------------------------------------------------------------------------
+onKeyUp            ]   good for handling the chars that you key-in
+onKeyDown       ]
+onKeyPress        ]   good for handling the code of character.
+
+                   
+Key Event Properties:
+
+keyCode
+charCode
+which
+shiftKey
+ctrlKey
+altKey
+--------------------------------------------------------------------------------------------------------------------
+example-16
+------------------------
+import { useState } from "react";
+import "./App.css";
+export function PasswordStrength() {
+const [warnPwordclass, setWarnPwordclass] = useState('');
+const [passwordStrength, setPasswordStrength] = useState('');
+const [pwordValue, setPwordValue] = useState('');
+const [border,setBorder]=useState('');
+function warnPasswordStrength(e) 
+{
+setPwordValue(e.target.value)
+if (pwordValue.length < 4 || pwordValue.length>15) 
+{
+setPasswordStrength('Poor Password');
+setWarnPwordclass('text-danger bi bi-emoji-frown-fill')
+setBorder('border border-danger p-4');
+}
+else if (pwordValue.length >= 4 && pwordValue.length <= 15 && ((pwordValue.search(/[A-Z]/) === -1) )) {
+setPasswordStrength('Weak Password atleast contain one capital letter');
+setWarnPwordclass('text-warning bi bi-emoji-frown-fill')
+setBorder('border border-warning p-4');
+}
+else {
+setPasswordStrength('Strong Password');
+setWarnPwordclass('text-success bi bi-emoji-smile-fill')
+setBorder('border border-success p-4');
+}
+}
+return (
+<div className="container-fluid">
+<div style={{ height: '100vh' }} className={`d-flex align-items-center justify-content-center`} >
+
+<dl className={border}>
+<h2 className="m-3 text-justify"> <i className="bi bi-person-fill"></i> User LogIn</h2>
+<dt className="m-2">User Name</dt>
+<dd> <input type="text" /></dd>
+<dt className="m-2">Password</dt>
+<dd><input type="password" onChange={warnPasswordStrength} /></dd>
+
+<dd><span className={warnPwordclass} ></span><span></span>{passwordStrength}</dd>
+</dl>
+</div>
+</div>
+)}
+
+export default PasswordStrength
+----------------------------------------------------------------------------------------------------------------------------------------
+example-17
+---------------------
+import { useState } from "react"
+
+export function KeyEventAssignmentComponent() {
+
+const [errorMsg, setErrorMsg] = useState('');
+const [errorClass, setErrorClass] = useState('')
+
+function verifyPassword(e) {
+console.log(e.target.value, e.target.value.length)
+if (e.target.value.length < 4) {
+setErrorMsg('Poor Password');
+setErrorClass('text-danger')
+} else {
+if (e.target.value.match(/[A-Z]/)) {
+setErrorMsg('Strong Password');
+setErrorClass('text-success')
+} else {
+setErrorMsg('Weak Password');
+setErrorClass('text-warning')
+}
+}
+}
+
+return (
+<div className="container-fluid">
+<h2>Password Strength</h2>
+<dd>
+<dt>Password</dt>
+<dd><input type="password" onKeyUp={verifyPassword} /></dd>
+<dd className={errorClass}>{errorMsg}</dd>
+</dd>
+</div>
+)
+}
+
+export default KeyEventAssignmentComponent
+-------------------------------------------------------------------------------------------------
+example-18
+-------------------------
+import { useState } from "react";
+
+export function KeyDemo()
+{
+    const [country, setCountry] = useState('');
+    const [tip, setTip] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [regExp, setRegExp] = useState(/ /);
+    const [mobileError, setMobileError] = useState('');
+
+    function handleCountryChange(e){
+        setCountry(e.target.value);
+        switch(e.target.value){
+            case "India":
+            setTip('+91 10 digits number');
+            setRegExp(/\+91\d{10}/);
+
+            break;
+            case "US":
+            setTip('+(1)(20)(460) 345 3210');
+            setRegExp(/\+\(1\)\(\d{2}\)\(\d{3}\)\s\d{3}\d{4}/);
+
+            break;
+            case "UK":
+            setTip('+(44)(230) 4670 3450');
+            setRegExp(/\+\(44\)\(\d{3}\)\s\d{4}\s\d{4}/);
+
+            break;
+        }
+    }
+
+    function handleMobileChange(e){
+        setMobile(e.target.value);
+    }
+
+    function handleSubmitClick(){
+        if(mobile.match(regExp)){
+            document.write("<h2>Verified Successfully..</h2>");
+        } else {
+            setMobileError(`Invalid Mobile - ${tip}`);
+        }
+    }
+   
+    return(
+        <div className="container-fluid">
+            <h3>Register User</h3>
+            <dl>
+               <dt>Your Country</dt>
+               <dd>
+                <select onChange={handleCountryChange}>
+                    <option>Select Country</option>
+                    <option>India</option>
+                    <option>US</option>
+                    <option>UK</option>
+                </select>
+               </dd>
+               <dt>Mobile</dt>
+               <dd>
+                <input type="text" onChange={handleMobileChange} placeholder={tip} />
+               </dd>
+               <dd className="text-danger">{mobileError}</dd>
+               <dd>
+                <button onClick={handleSubmitClick} className="btn btn-primary">Submit</button>
+               </dd>
+            </dl>
+        </div>
+    )
+}
+export default KeyDemo
+---------------------------------------------------------------------------------------
+example-19
+------------------------
+import { useState } from "react";
+
+export function KeyDemo()
+{
+    const [userName, setUsername] = useState('john');
+    const [tip, setTip] = useState('');
+
+    function ChangeCase(){
+        setUsername(userName.toUpperCase());
+        if(userName==""){
+            setTip('User Name Required');
+        } else {
+            setTip('');
+        }
+    }
+    function handleUserChange(e){
+        setUsername(e.target.value)
+    }
+    function ShowTip(){
+        setTip('Name in Block Letter Only');
+    }
+   
+    return(
+        <div className="container-fluid">
+            <h3>Register User</h3>
+            <dl>
+               <dt>User Name</dt>
+               <dd><input type="text" onFocus={ShowTip} onChange={handleUserChange} value={userName} onBlur={ChangeCase} placeholder="Name in block letters" /></dd>
+               <dd>{tip}</dd>
+            </dl>
+        </div>
+    )
+}
+export default KeyDemo
+-------------------------------------------------------------------
+example-20
+----------------------
+import { useState } from "react";
+
+export function KeyDemo()
+{
+    const [userName, setUsername] = useState('john');
+    const [tip, setTip] = useState('');
+
+    function ChangeCase(){
+        setUsername(userName.toUpperCase());
+        setTip('');
+    }
+    function handleUserChange(e){
+        setUsername(e.target.value)
+    }
+    function ShowTip(){
+        setTip('Name in Block Letter Only');
+    }
+   
+    return(
+        <div className="container-fluid">
+            <h3>Register User</h3>
+            <dl>
+               <dt>User Name</dt>
+               <dd><input type="text" onFocus={ShowTip} onChange={handleUserChange} value={userName} onBlur={ChangeCase} placeholder="Name in block letters" /></dd>
+               <dd>{tip}</dd>
+            </dl>
+        </div>
+    )
+}
+
+export default KeyDemo
+-------------------------------------------------------------------
+example-21
+----------------------
+import { useState } from "react";
+
+export function KeyDemo()
+{
+    const [users] = useState([{"UserName":"john"}, {"UserName":"john12"}, {"UserName":"david"}]);
+    const [userError, setUserError] = useState('');
+    const [errorClass, setErrorClass] = useState('');
+    const [passwordWarning, setPasswarning] = useState({'display':'none'});
+
+    function VerifyUserName(e){
+        for(var user of users){
+            if(user.UserName==e.target.value) {
+                setUserError('User Name Taken - Try Another');
+                setErrorClass('text-danger');
+                break;
+            } else {
+                setUserError('User Name Available');
+                setErrorClass('text-success');
+            }
+        }
+    }
+
+    function VerifyPassword(e){
+        console.log(`
+             Key Code : ${e.keyCode} \n
+             Char Code : ${e.charCode} \n
+             Which  : ${e.which}
+        `);
+        if(e.which>=65 && e.which<=90) {
+            setPasswarning({'display':'block'});
+        } else {
+            setPasswarning({'display':'none'});
+        }
+    }
+
+    return(
+        <div className="container-fluid">
+            <h3>Register User</h3>
+            <dl>
+                <dt>User Name</dt>
+                <dd><input type="text" onKeyUp={VerifyUserName} /></dd>
+                <dd className={errorClass}>{userError}</dd>
+                <dt>Password</dt>
+                <dd><input type="password" onKeyPress={VerifyPassword} /></dd>
+                <dd className="text-warning" style={passwordWarning}>
+                    <span className="bi bi-exclamation-triangle"></span> Warning : Caps ON
+                </dd>
+            </dl>
+        </div>
+    )
+}
+export default KeyDemo
+--------------------------------------------------
+example-22
+--------------------------------
+import React, { useState } from "react";
+
+const 
+
+UserNameAndPasswordValidation  = () => {
+  const [UserNames, SetUserNames] = useState([
+    { Username: "James" },
+    { Username: "Rock" },
+    { Username: "Robert" },
+    { Username: "Thomas" },
+    { Username: "Galga" },
+    { Username: "Angelina" },
+    { Username: "Rebecca" },
+    { Username: "Lara" },
+    { Username: "Sara" },
+    { Username: "Kiara" },
+    { Username: "Elizebeth" },
+  ]);
+  const [NewUserGivenName, SetNewUserGivenName] = useState("");
+  const [NewUserNameMesg, SetNewUserNameMesg] = useState("");
+  const [ErrorMessage, SetErrorMessage] = useState([
+    {PassStr : "Password length should be 4-16 Characters"},
+    { UpperC: "Password doesn't have any UpperCase Letter " },
+    { LowerC: "Password doesn't have any Lowercase Letter" },
+    { Numbers: "Password doesn't have any Number" },
+    { Symbols: "Password doesn't have any Special Characters like @ $ -" },
+    {AllOkPass: "Password Strength- Strong"}
+  ]);
+
+  const [Passwordstr, SetPasswordStr ]= useState({display:"",color:"red", fontSize : "100%"})
+  const [NumberPasswordStyle, SetNumberPasswordStyle ]= useState({display:"",color:"red", fontSize : "100%"})
+  const [UpperPasswordStyle, SetUpperPasswordStyle ]= useState({display:"",color:"red", fontSize : "100%"})
+  const [LowerPasswordStyle, SetLowerPasswordStyle ]= useState({display:"",color:"red", fontSize : "100%"})
+  const [SymbolPasswordStyle, SetSymbolPasswordStyle ]= useState({display:"",color:"red", fontSize : "100%"})
+  const [AllOkPassStyle, SetAllOkPassStyle ]= useState({display:"none",color:"green", fontSize : "100%"})
+
+  const SetNewUserUSERNameHandle = (event) => {
+    SetNewUserGivenName(event.target.value);
+    console.log(event.target.value);
+  };
+
+  const NewUserGivenNameCheckHandle = () => {
+    for (var userName of UserNames) {
+      if (NewUserGivenName == userName.Username) {
+        SetNewUserNameMesg("UserName Already Taken");
+        break;
+      } else {
+        SetNewUserNameMesg("UserName Available");
+      }
+    }
+  };
+
+  const OnSubmitClickHandle = (event) => {
+    event.preventDefault();
+    SetUserNames((preval) => [...preval, { Username: NewUserGivenName }]);
+  };
+
+
+  const PasswordVerification = (event) =>{
+    console.log(event.target.value)
+    let Passwords = event.target.value;
+    let Upperregex = /[A-Z]/
+    let Lowerregex = /[a-z]/
+    let Numberregex = /[0-9]/
+    let Symbolregex = /[@\.\$\-_]/
+   
+    if(Passwords.length>=4 && Passwords.length<=16){}
+    if(Passwords.match(Upperregex)){
+      console.log("uppermatch")
+      SetNumberPasswordStyle({display:"none",color:"red", fontSize : "100%"})
+    }
+    else{
+      SetNumberPasswordStyle({display:"",color:"red", fontSize : "100%"})
+    }
+    if(Passwords.match(Lowerregex)){
+      console.log("lowerMatch");
+      SetUpperPasswordStyle({display:"none",color:"red", fontSize : "100%"})
+    }
+    else{
+      SetUpperPasswordStyle({display:"",color:"red", fontSize : "100%"})
+    }
+    if(Passwords.match(Numberregex)){
+      console.log("Numbermatch");
+      SetLowerPasswordStyle({display:"none",color:"red", fontSize : "100%"})
+    }
+    else{
+      SetLowerPasswordStyle({display:"",color:"red", fontSize : "100%"})
+    }
+    if(Passwords.match(Symbolregex)){
+      console.log("symbolMatch");
+      SetSymbolPasswordStyle({display:"none",color:"red", fontSize : "100%"})
+    }
+    else{
+      SetSymbolPasswordStyle({display:"",color:"red", fontSize : "100%"})
+    }
+    if(Passwords.match(Upperregex)&&Passwords.match(Lowerregex)&&Passwords.match(Numberregex)&&Passwords.match(Symbolregex)){
+      SetAllOkPassStyle({display:"",color:"green", fontSize : "100%"})
+    }
+  }
+
+  return (
+    <div className="container-fluid text-center">
+      <h1>forms</h1>
+      <form action="">
+        <label>Enter Name:</label>
+        <br />
+        <input type="text" name="" id="" />
+        <br />
+        <br />
+        <label>Enter UserName:</label>
+        <br />
+        <input
+          type="text"
+          name=""
+          id=""
+          onBlur={NewUserGivenNameCheckHandle}
+          value={NewUserGivenName}
+          onChange={SetNewUserUSERNameHandle}
+        />
+        <br />
+        <br />
+        <dt>{NewUserNameMesg}</dt>
+        <label>Enter Password:</label>
+        <br />
+        <input type="text" onChange={PasswordVerification} name="" id="" />
+        <dl className="col-md-4 mx-auto mt-4" >
+          <dt><li style={NumberPasswordStyle} className="p-1 ">{ErrorMessage[0].PassStr}</li></dt>
+          <dt><li style={NumberPasswordStyle} className="p-1 ">{ErrorMessage[1].UpperC}</li></dt>
+          <dt><li style={UpperPasswordStyle} className="p-1 ">{ErrorMessage[2].LowerC}</li></dt>
+          <dt><li style={LowerPasswordStyle} className="p-1 ">{ErrorMessage[3].Numbers}</li></dt>
+          <dt><li style={SymbolPasswordStyle} className="p-1 ">{ErrorMessage[4].Symbols}</li></dt>
+          <dt><li style={AllOkPassStyle} className="p-1 ">{ErrorMessage[5].AllOkPass}</li></dt>
+        </dl>
+        <br />
+        <button onClick={OnSubmitClickHandle}>Submit </button>
+      </form>
+    </div>
+  );
+};
+
+export default UserNameAndPasswordValidation;
+----------------------------------------------------------------------------------------
+*image put inside public folder
+---------------------------------------------------------
+example-23
+----------------------
+import React, { useState } from "react";
+
+export function ButtonDemo()
+{
+    function OpenWindow(){
+        window.open("m1.jpeg","House","width=400 height=400");
+    }
+    return(
+        <div className="container-fluid">
+            <h2>Double Click</h2>
+            <img onDoubleClick={OpenWindow} src="m1.jpeg"  width="100" height="100"/>
+        </div>
+    )
+}
+
+export default ButtonDemo;
+-------------------------------------------------------------------------------------------------------------------
+example-24
+------------------------
+import React, { useState } from "react";
+
+export function ButtonDemo()
+{
+    const [msg, setMsg] = useState('');
+
+    function OpenWindow(){
+        window.open("m1.jpeg","Mobile","width=400 height=400");
+    }
+    function handleCut(){
+        setMsg('Removed - Copied to clipboard');
+    }
+    function handleCopy(){
+        setMsg('Copied to Clipboard');
+    }
+    function handlePaste(){
+        setMsg('Inserted from Clipboard');
+    }
+    return(
+        <div className="container-fluid">
+            <h2>Double Click</h2>
+            <img onDoubleClick={OpenWindow} src="m1.jpeg"  width="100" height="100"/>
+             <br /> <br/>
+            <textarea rows="4" cols="40" onCut={handleCut} onCopy={handleCopy} onPaste={handlePaste}>
+
+            </textarea>
+            <p>{msg}</p>
+        </div>
+    )
+}
+
+export default ButtonDemo;
+----------------------------------------------------------------------------------------------------------------------
+example-25
+------------------------
+import { useEffect, useState } from "react";
+
+export function ButtonDemo()
+{
+    const [msg, setMsg] = useState('');
+
+    function Msg1(){
+        setMsg("Hello HSBC Students!");
+    }
+    function Msg2(){
+        setMsg("How are you?");
+    }
+    function Msg3(){
+        setMsg("Welcome to React");
+    }
+    useEffect(()=>{
+        setTimeout(Msg1,3000);
+        setTimeout(Msg2,5000);
+        setTimeout(Msg3,10000);
+    },[]);
+   
+    return(
+        <div className="container-fluid">
+            <h1 className="text-center text-primary">{msg}</h1>
+        </div>
+    )
+}
+export default ButtonDemo;
+--------------------------------------------------------------------------------------------------------------------------
+example-26
+--------------------------
+import { useEffect, useState } from "react";
+
+export function ButtonDemo()
+{
+    const [msg, setMsg] = useState('');
+
+    function ShowTime(){
+        var now = new Date();
+        setMsg(now.toLocaleTimeString());
+    }
+   
+    useEffect(()=>{
+       setInterval(ShowTime, 1000);
+    },[]);
+   
+    return(
+        <div className="container-fluid">
+            <h1 className="text-center text-primary">{msg}</h1>
+        </div>
+    )
+}
+export default ButtonDemo;
+------------------------------------------------------------------------------------------------------
+example-27
+---------------------------
+import { useEffect, useState } from "react";
+
+export function ButtonDemo()
+{
+    const [images, setImages] = useState(["m1.jpeg", "m2.jpeg","m3.jpeg","m4.jpg","m5.jpg"]);
+    const [image, setImage] = useState('');
+
+    var count = 0;
+    function LoadImages(){
+       
+        count++;
+        if(count==images.length) {
+            count = 0;
+        } else {
+            console.log(images[count]);
+            setImage(images[count]);
+        }
+    }
+
+    useEffect(()=>{
+        setInterval(LoadImages,1000);
+    },[]);
+   
+    return(
+        <div className="container-fluid">
+            <h2>Realme Mobile</h2>
+            <img  width="200" height="200" src={image}/>
+        </div>
+    )
+}
+export default ButtonDemo;
+-------------------------------------------------------------------------------------------------------
+example-28(spinner Example)
+------------------------------------------------------------------
+import { useEffect, useState } from "react";
+
+export function ButtonDemo()
+{
+    const [status, setStatus] = useState(1);
+    const [textContainer, setTextContainer] = useState({display:'none'});
+    const [imgContainer, setImgContainer] = useState({display:'none'});
+
+
+    var count = 1;
+    function Loading(){
+        if(count==100){
+            setImgContainer({
+                display:'block'
+            });
+            setTextContainer({
+                display: 'none'
+            })
+        } else {
+            count++;
+            setStatus(count);
+        }
+    }
+
+    function handleLoadClick(){
+        setTextContainer({
+            display: 'block'
+        })
+        setInterval(Loading, 200);
+    }
+
+    useEffect(()=>{
+       
+    },[]);
+   
+    return(
+        <div className="container-fluid">
+           <button className="btn mt-2 btn-primary" onClick={handleLoadClick}>Load Image</button>
+           <div className="d-flex justify-content-center align-items-center" style={{height:'500px'}}>
+                <div className="text-center" style={textContainer}>
+                    <div className="spinner-border"></div>
+                    <p>{status} %</p>
+                    <p>Loading</p>
+                </div>
+                <div style={imgContainer}>
+                    <img src="m1.jpeg" width="300" height="200"/>
+                </div>
+           </div>
+        </div>
+    )
+}
+export default ButtonDemo;
+--------------------------------------------------------------------------------------------------------------------
+example-29
+-------------------------------------------
+import { useEffect, useState } from "react";
+
+export function ButtonDemo()
+{
+    const [status, setStatus] = useState(1);
+    const [textContainer, setTextContainer] = useState({display:'none'});
+    const [imgContainer, setImgContainer] = useState({display:'none'});
+    const [progressValue, setProgressValue] = useState(1);
+
+
+    var count = 1;
+    function Loading(){
+        if(count==100){
+            setImgContainer({
+                display:'block'
+            });
+            setTextContainer({
+                display: 'none'
+            })
+        } else {
+            count++;
+            setProgressValue(count);
+            setStatus(count);
+        }
+    }
+
+    function handleLoadClick(){
+        setTextContainer({
+            display: 'block'
+        })
+        setInterval(Loading, 200);
+    }
+
+    useEffect(()=>{
+       
+    },[]);
+   
+    return(
+        <div className="container-fluid">
+           <button className="btn mt-2 btn-primary" onClick={handleLoadClick}>Load Image</button>
+           <div className="d-flex justify-content-center align-items-center" style={{height:'500px'}}>
+                <div className="text-center" style={textContainer}>
+                    <progress min="1" max="100" value={progressValue}></progress>
+                    <p>{status} %</p>
+                    <p>Loading</p>
+                </div>
+                <div style={imgContainer}>
+                    <img src="m1.jpeg" width="300" height="200"/>
+                </div>
+           </div>
+        </div>
+    )
+}
+export default ButtonDemo;
+---------------------------------------------
+example-30
+--------------------------
+import React from "react";
+
+export class App2 extends React.Component
+{
+      constructor(){
+         super();
+         this.state = {
+            title : "Categories List",
+            categories : ["Electronics", "Footwear", "Fashion"]
+         }
+      }
+      render(){
+        return(
+            <React.Fragment>
+               <div className="container-fluid">
+               <h2>{this.state.title}</h2>
+               <ol>
+                  {
+                    this.state.categories.map((category)=>
+                     <li key={category}>{category}</li>
+                    )
+                  }
+               </ol>
+               </div>
+            </React.Fragment>
+        )
+      }
+}
+
+export default App2;
+------------------------------------------------------------------------------------
+example-31
+--------------------------------------------------
+import React from "react";
+
+export class App2 extends React.Component
+{
+      constructor(){
+         super();
+         this.state = {
+            Name : '',
+            Price: 0,
+            City: ''
+         }
+         this.handleNameChange = this.handleNameChange.bind(this);
+         this.handlePriceChange = this.handlePriceChange.bind(this);
+      }
+
+      handleNameChange(e){
+         this.setState({
+            Name: e.target.value,
+            Price: this.state.Price,
+            City: this.state.City
+         })
+      }
+
+      handlePriceChange(e){
+         this.setState({
+            Name: this.state.Name,
+            Price: e.target.value,
+            City: this.state.City
+         })
+      }
+      handleCityChange(e){
+         this.setState({
+            Name: this.state.Name,
+            Price: this.state.Price,
+            City: e.target.value
+         })
+      }
+
+      handleRegisterClick(){
+         alert(JSON.stringify(this.state));
+      }
+
+      render(){
+        return(
+            <React.Fragment>
+               <div className="container-fluid">
+                   <div className="mb-2 mt-2">
+                     <dl>
+                        <dt>Name</dt>
+                        <dd><input type="text" onChange={this.handleNameChange} /></dd>
+                        <dt>Price</dt>
+                        <dd><input type="number" onChange={this.handlePriceChange}/></dd>
+                        <dt>City</dt>
+                        <dd>
+                           <select onChange={this.handleCityChange.bind(this)}>
+                              <option>Delhi</option>
+                              <option>Hyd</option>
+                           </select>
+                        </dd>
+                        <button onClick={this.handleRegisterClick.bind(this)}>Register</button>
+                     </dl>
+                   </div>
+                   <div>
+                     <h2>Details</h2>
+                     <dl>
+                        <dt>Name</dt>
+                        <dd>{this.state.Name}</dd>
+                        <dt>Price</dt>
+                        <dd>{this.state.Price}</dd>
+                        <dt>City</dt>
+                        <dd>{this.state.City}</dd>
+                     </dl>
+                   </div>
+               </div>
+            </React.Fragment>
+        )
+      }
+}
+
+export default App2;
+-------------------------------------------------------------------
+React Request Flow
+React Application Bootstrap Process [Static DOM => Dynamic DOM]
+
+                             Component Life Cycle
+- It defines various phases of component from the time of creating a component and destroying the component.
+- A component is created when user requests the component.
+- A component is destroyed when another component is requested or when you close the appication.
+- Every component have 3 major phases
+
+        a) Mount
+        b) Update
+        c) Unmount
+
+- Mount        
+        componentWillMount()
+        componentDidMount()
+- Update
+        componentWillUpdate()
+- UnMount
+        componentWillUnmount()
+
+Note: The life span of every component is from component request to component destrory, which is trigged when any another component is requested.
+--------------------------------------------------------------------------------------------------------------------------------------
+example-32
+---------------------------
+import React from "react";
+
+export class  LoginComponent extends React.Component
+{
+    componentDidMount(){
+        alert(`Login Component Requested and Will mount`);
+    }
+    componentWillUnmount(){
+        alert(`Login Component will unmount`);
+    }
+    render(){
+        return(
+            <div>
+                <h2>User Login</h2>
+            </div>
+        )
+    }
+}
+
+export class RegisterComponent extends React.Component
+{
+    componentDidMount(){
+        alert(`Register Component Requested and Will mount`);
+    }
+    componentWillUnmount(){
+        alert(`Register Component will unmount`);
+    }
+    render(){
+        return(
+            <div>
+                <h2>Register User</h2>
+            </div>
+        )
+    }
+}
+
+export class App2 extends React.Component
+{
+    constructor(){
+        super();
+        this.state = {
+            View: ''
+        }
+    }
+    handleLoginClick(){
+        this.setState({
+            View: <LoginComponent/>
+        })
+    }
+    handleRegisterClick(){
+        this.setState({
+            View: <RegisterComponent/>
+        })
+    }
+    render(){
+        return(
+            <div className="container-fluid">
+                <h2>Life Cycle Demo</h2>
+                <button onClick={this.handleLoginClick.bind(this)}>Login</button>
+                <button onClick={this.handleRegisterClick.bind(this)}>Register</button>
+                <hr />
+                {this.state.View}
+            </div>
+        )
+    }
+}
+
+export default App2;
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+example-33
+-------------------------
+import React from "react";
+
+export class LoginTemplate extends React.Component
+{
+    constructor(props){
+        super();
+    }
+     render(){
+        return(
+            <div className="container-fluid">
+                <h2>{this.props.title}</h2>
+                <dl>
+                    <dt>{this.props.loginid}</dt>
+                    <dd><input type={this.props.logintype} /></dd>
+                    <dt>Password</dt>
+                    <dd><input type="password"/></dd>
+                </dl>
+                <button>Login</button>
+            </div>
+        )     }}
+
+export class App2 extends React.Component
+{
+    render(){
+        return(
+            <div>
+                <h2>Class Properties</h2>
+                <LoginTemplate title="Admin Login" loginid="Email" logintype="email" />
+            </div>
+        )    }}
+export default App2;
+-------------------------------------------------------------------------------------------------------------
+example-34
+--------------------
+import React from "react";
+
+export class ToolbarTemplate extends React.Component
+{
+     constructor(props){
+        super();
+     }
+     render(){
+         if(this.props.layout==="horizontal"){
+            return(
+                <nav>
+                    <div className="bi bi-facebook mb-3"></div>
+                    <div className="bi bi-twitter mb-3"></div>
+                    <div className="bi bi-linkedin mb-3"></div>
+                    <div className="bi bi-instagram mb-3"></div>
+                </nav>
+            )
+         } else {
+            return(
+                <nav className="d-flex">
+                    <div className="bi bi-facebook me-3"></div>
+                    <div className="bi bi-twitter me-3"></div>
+                    <div className="bi bi-linkedin me-3"></div>
+                    <div className="bi bi-instagram me-3"></div>
+                </nav>
+            )
+         }
+     }
+}
+
+export class App2 extends React.Component
+{
+     constructor(){
+        super();
+        this.state = {
+             viewLayout: ''
+        }
+     }
+     handleLayoutChange(e){
+         this.setState({
+            viewLayout: e.target.value
+         })
+     }
+     render(){
+        return(
+            <div className="container-fluid">
+                <h2>Select a Toolbar Layout</h2>
+                <div className="w-25">
+                    <select onChange={this.handleLayoutChange.bind(this)} className="form-select">
+                        <option value="-1">Select Layout</option>
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                    </select>
+                </div>
+                <h3>Toolbar</h3>
+                <ToolbarTemplate layout={this.state.viewLayout}/>
+            </div>
+        )
+     }
+}
+
+export default App2;
+-------------------------------------------------------------------------------------------------------------------------------
+example-35
+-----------------------------
+import React from "react";
+
+export class ToolbarTemplate extends React.Component
+{
+     constructor(props){
+        super();
+     }
+     render(){
+         if(this.props.layout==="vertical"){
+            return(
+                <nav>
+                   <div className="btn-group-vertical">
+                        <button className="btn btn-danger mb-2"> <span className="bi bi-facebook"></span> Facebook</button>
+                        <button className="btn btn-danger mb-2"> <span className="bi bi-twitter"></span> Twitter</button>
+                        <button className="btn btn-danger mb-2"> <span className="bi bi-linkedin"></span> Linked In</button>
+                        <button className="btn btn-danger mb-2"> <span className="bi bi-instagram"></span> Instagram</button>
+                   </div>
+                </nav>
+            )
+         } else {
+            return(
+                <nav className="d-flex">
+                    <div className="bi bi-facebook me-3"></div>
+                    <div className="bi bi-twitter me-3"></div>
+                    <div className="bi bi-linkedin me-3"></div>
+                    <div className="bi bi-instagram me-3"></div>
+                </nav>
+            )
+         }
+     }
+}
+
+export class App2 extends React.Component
+{
+     constructor(){
+        super();
+        this.state = {
+             viewLayout: ''
+        }
+     }
+     handleLayoutChange(e){
+         this.setState({
+            viewLayout: e.target.value
+         })
+     }
+     render(){
+        return(
+            <div className="container-fluid">
+                <h2>Select a Toolbar Layout</h2>
+                <div className="w-25">
+                    <select onChange={this.handleLayoutChange.bind(this)} className="form-select">
+                        <option value="-1">Select Layout</option>
+                        <option value="horizontal">Horizontal</option>
+                        <option value="vertical">Vertical</option>
+                    </select>
+                </div>
+                <h3>Toolbar</h3>
+                <ToolbarTemplate layout={this.state.viewLayout}/>
+            </div>
+        )
+     }
+}
+
+export default App2;
+---------------------------------------------------------------------------------------------------------
+example-36
+----------------------
+import { useState } from "react";
+export function FormDemo(){
+
+    const [userDetails, setUserDetails] = useState({"UserName":"", "Age":0, "City":"", "Mobile":""});
+
+
+    function handleNameChange(e){
+        setUserDetails({
+            UserName: e.target.value,
+            Age: userDetails.Age,
+            City: userDetails.City,
+            Mobile: userDetails.Mobile
+        })
+    }
+
+    function handleAgeChange(e){
+        setUserDetails({
+            UserName: userDetails.UserName,
+            Age: e.target.value,
+            City: userDetails.City,
+            Mobile: userDetails.Mobile
+        })
+    }
+
+    function handleCityChange(e){
+        setUserDetails({
+            UserName: userDetails.UserName,
+            Age: userDetails.Age,
+            City: e.target.value,
+            Mobile: userDetails.Mobile
+        })
+    }
+    function handleMobileChange(e){
+        setUserDetails({
+            UserName: userDetails.UserName,
+            Age: userDetails.Age,
+            City: userDetails.City,
+            Mobile: e.target.value
+        })
+    }
+
+
+    function handleFormSubmit(e){
+      e.preventDefault();
+      alert(JSON.stringify(userDetails));
+    }
+    return(
+        <div className="container-fluid">
+            <h2>Register User</h2>
+            <form onSubmit={handleFormSubmit}>
+            <dl>
+                <dt>User Name</dt>
+                <dd><input type="text" onChange={handleNameChange} name="UserName"/></dd>
+                <dt>Age</dt>
+                <dd><input type="number" name="Age" onChange={handleAgeChange}/></dd>
+                <dt>City</dt>
+                <dd>
+                    <select name="City" onChange={handleCityChange}>
+                        <option>Delhi</option>
+                        <option>Hyd</option>
+                    </select>
+                </dd>
+                <dt>Mobile</dt>
+                <dd>
+                    <input type="text" name="Mobile" onChange={handleMobileChange}/>
+                </dd>
+            </dl>
+            <button>Register</button>
+            </form>
+        </div>
+    )
+}
+
+export default FormDemo;
+-------------------------------------------------------------------------------------------------------------------------------
+example-37
+-----------------------
+import { useState } from "react";
+
+
+export function FormDemo(){
+
+    const [userDetails, setUserDetails] = useState({"UserName":"", "Age":0, "City":"", "Mobile":""});
+    const [errors, setErrors] = useState({"UserName":"", "Age":"", "City":"", "Mobile":""});
+
+
+    function handleNameChange(e){
+       if(e.target.value===""){
+          setErrors({
+            UserName: "User Name Required",
+            Age: errors.Age,
+            City: errors.City,
+            Mobile: errors.Mobile
+          })
+       } else {
+            setErrors({
+                UserName: ""
+            })
+            setUserDetails({
+                UserName: e.target.value,
+                Age: userDetails.Age,
+                City: userDetails.City,
+                Mobile: userDetails.Mobile
+            })
+       }
+    }
+
+    function handleAgeChange(e){
+        if(isNaN(e.target.value)){
+            setErrors({
+                Age: "Age must be a number"
+            })
+        } else {
+            setErrors({
+                Age: ""
+            })
+            setUserDetails({
+                UserName: userDetails.UserName,
+                Age: e.target.value,
+                City: userDetails.City,
+                Mobile: userDetails.Mobile
+            })
+        }
+    }
+
+    function handleCityChange(e){
+       if(e.target.value==="-1") {
+          setErrors({
+            City: "Please Select your city"
+          })
+       } else {
+         setErrors({
+            City: ""
+         })
+        setUserDetails({
+            UserName: userDetails.UserName,
+            Age: userDetails.Age,
+            City: e.target.value,
+            Mobile: userDetails.Mobile
+        })
+       }
+    }
+    function handleMobileChange(e){
+         if(e.target.value.match(/\+91\d{10}/)) {
+            setUserDetails({
+                UserName: userDetails.UserName,
+                Age: userDetails.Age,
+                City: userDetails.City,
+                Mobile: e.target.value
+            })
+            setErrors({
+                Mobile: ""
+            })
+         } else {
+            setErrors({
+                Mobile: "Invalid Mobile"
+            })
+         }
+    }
+
+
+    function handleFormSubmit(e){
+      e.preventDefault();
+      alert(JSON.stringify(userDetails));
+    }
+    return(
+        <div className="container-fluid">
+            <h2>Register User</h2>
+            <form onSubmit={handleFormSubmit}>
+            <dl>
+                <dt>User Name</dt>
+                <dd><input type="text" onChange={handleNameChange} name="UserName"/></dd>
+                <dd className="text-danger">{errors.UserName}</dd>
+                <dt>Age</dt>
+                <dd><input type="text" name="Age" onChange={handleAgeChange}/></dd>
+                <dd className="text-danger">{errors.Age}</dd>
+                <dt>City</dt>
+                <dd>
+                    <select name="City" onChange={handleCityChange}>
+                        <option value="-1">Choose City</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Hyd">Hyd</option>
+                    </select>
+                </dd>
+                <dd className="text-danger">{errors.City}</dd>
+                <dt>Mobile</dt>
+                <dd>
+                    <input type="text" name="Mobile" onChange={handleMobileChange}/>
+                </dd>
+                <dd className="text-danger">{errors.Mobile}</dd>
+            </dl>
+            <button>Register</button>
+            </form>
+        </div>
+    )
+}
+export default FormDemo;
+------------------------------------------------------------------------------------------------------
+> npm  install  formik  --save   
+----------------------------------------------------------------------
+ 3rd Party Form Library for React
+- Formik
+- Kendo [Telerik]
+- DevExpress etc..
+--------------------------------------------------------------------
+example-38
+-----------------------
+import { useFormik } from "formik";
+
+export function FormikDemo()
+{
+
+    function UserVaidation(formBody)
+    {
+        var errors = {};
+
+        if(formBody.UserName==""){
+            errors.UserName="User Name Required";
+        } else if(formBody.UserName.length<4) {
+            errors.UserName="User Name too short min 4 chars required";
+        } else {
+            errors.UserName="";
+        }
+
+        if(isNaN(formBody.Age)){
+            errors.Age = "Age must be a number";
+        } else {
+            errors.Age ="";
+        }
+
+        if(formBody.City=="-1"){
+            errors.City = "Please Select your City";
+        } else {
+            errors.City = "";
+        }
+
+        if(formBody.Mobile.match(/\+91\d{10}/)) {
+            errors.Mobile = "";
+        } else {
+            errors.Mobile = "Invalid Mobile"
+        }
+
+        return errors;
+    }
+
+    const formik = useFormik({
+        initialValues: {
+            "UserName": "",
+            "Age": 0,
+            "City":"",
+            "Mobile":""
+        },
+        validate: UserVaidation,
+        onSubmit: (values) => {
+            alert(JSON.stringify(values));
+        }
+    })
+    return(
+        <div className="container-fluid">
+           <form onSubmit={formik.handleSubmit}>
+           <h2>Register - Formik Form</h2>
+            <dl>
+                <dt>User Name</dt>
+                <dd><input type="text" onBlur={formik.handleBlur} onChange={formik.handleChange} name="UserName"/></dd>
+                <dd className="text-danger">{formik.errors.UserName}</dd>
+                <dt>Age</dt>
+                <dd><input type="text" onChange={formik.handleChange} name="Age" /></dd>
+                <dd className="text-danger">{formik.errors.Age}</dd>
+                <dt>City</dt>
+                <dd>
+                    <select onChange={formik.handleChange} name="City">
+                        <option value="-1">Choose City</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Hyd">Hyd</option>
+                    </select>
+                </dd>
+                <dd className="text-danger">{formik.errors.City}</dd>
+                <dt>Mobile</dt>
+                <dd>
+                    <input type="text" onChange={formik.handleChange} name="Mobile" />
+                </dd>
+                <dd className="text-danger">{formik.errors.Mobile}</dd>
+            </dl>
+            <button>Register</button>
+           </form>
+        </div>
+    )
+}
+
+export default FormikDemo
+--------------------------------------------------------------------------------------------------------
+example-39
+------------------------------
+
+React Native
+------------------------------------------------------
+step 1:- npm i -g expo-cli
+
+step 2:- expo init mynative
+select blank
+
+step 3:-ch mynative
+
+step 4:- expo client (install in you mobile from playstore)
+-----------------------------------------------------------------------------------------
+React Native is a JavaScript framework used for developing a real, native mobile application for iOS and Android. 
+It uses only JavaScript to build a mobile application.
+It is like React, which uses native component rather than using web components as building blocks.
+React Native is based on React, JavaScript library of Facebook, and XML-esque markup (JSX) for developing the user interface. It targets the mobile platform rather than the browser.
+
+What are React Native apps?
+React Native apps are not web application. They are running on a mobile device, and it does not load over the browser. It is also not a Hybrid app that builds over Ionic, Phone Gap, etc. that runs over WebView component. React Native apps are the real native app, the JavaScript code stays as JavaScript, and they run in some extra thread by the compiled app. The user interface and everything are compiled to native code.
+------------------------------------------------------------------------------------------------------------------------------------
+History of React Native
+Facebook develops the React Native in 2013 for their internal project Hackathon. 
+Later on, it was released publically in January 2015 as React.js, and in March 2015, Facebook announced that React Native is open and available on GitHub.
+
+React Native was initially developed for the iOS application. However, recently it also supports the Android operating system.
+
+Advantages of React Native
+-----------------------------------------------------------------------------------------------------------------------
+There are several advantages of React Native for building mobile applications. Some of them are given below:
+
+Cross-Platform Usage: Provide facility of "Learn once write everywhere", it works for both platform Android as well iOS devices.
+
+Class Performance: The code written in React Native are compiled into native code, which enables it for both operating systems as well as it functions in the same way on both the platforms.
+
+JavaScript: The JavaScript knowledge is used to build native mobile apps.
+
+Community: The large community of React and React Native around helps us to find any answer we require.
+
+Hot Reloading: Making a few changes in the code of your app will be immediately visible during development. If business logic is changed, its reflection is live reloaded on screen.
+
+Improving with Time: Some features of iOS and Android are still not supported, and the community is always inventing the best practices.
+
+Native Components: We will need to write some platform specific code if we want to create native functionality which is not designed yet.
+
+Existence is Uncertain: As the Facebook develop this framework, its presence is uncertain since it keeps all the rights to kill off the project anytime. As the popularity of React Native rises, it is unlikely to happen.
+------------------------------------------------------------------------------------------------------------------
+example-1
+---------------------------
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text>Hello Students</Text>
+      <StatusBar style="auto" />
+    </View>
+  );}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+--------------------------------------------------------------------------------------------
+import React, {Component} from 'react': imports the library and other components from react module and assign then to variable React.
+
+const instruction: sets to display the platform-specific message.
+
+export default class App extends Component: defines the classes that extend the React Component. The export default class 
+
+modifier makes the class "public". This block of code defines the components that represent the user interface.
+
+render(): a function that returns a React element.
+
+return(): returns the result of layout and UI components.
+
+View: a container that supports the layout accessibility controls. It is a fundamental component for building the UI.
+
+Text: a React component for displaying text.
+
+style: a property used for styling the components using StyleSheet.
+
+styles: used to design individual components.
+
+{styles.instructions}>{instructions}:
+const styles = StyleSheet.create({}): The StyleSheet class creates the style object that controls the layout and appearance of components. It is similar to Cascading Style Sheets (CSS) used on the Web.
+-------------------------------------------------------------------------------------------------------------------------
+React Native State
+There are two types of data state and props in React Native which control the component. The component that uses the state is mutable. They can be changed later on if required. The props component is immutable, and it is fixed throughout the lifetime.
+
+The state is generally initialized in constructor and then call setState when we want to change it.
+
+In this example, we create a Text component with state data. The content of Text component will be updated by clicking on it. The event onPress call the setState, and it updates the state "myState" text.
+
+React Native state Example 2
+-----------------------------------------------------------
+ import React, {Component} from 'react';  
+import { Text, View } from 'react-native';  
+  
+export default class App extends Component {  
+    state = {  
+        myState: 'This is a text component, created using state data. It will change or updated on clicking it.'  
+    }  
+    updateState = () => this.setState({myState: 'The state is updated'})  
+    render() {  
+        return (  
+            <View>  
+                <Text onPress={this.updateState}> {this.state.myState} </Text>  
+            </View>  
+        );  
+    }  
+}  
+-----------------------------------------------------------------------------------------------------------------
+Example-3
+--------------------
+import React, { Component } from 'react';  
+import {StyleSheet,Text,View,TextInput,TouchableOpacity} from 'react-native';  
+  
+export default class App extends Component {  
+    state: {  
+        password: string,  
+        isPasswordVisible: boolean,  
+        toggleText: string,  
+    }  
+    constructor(props: Props) {  
+        super(props);  
+        this.state = {  
+            password: '',  
+            isPasswordVisible: true,  
+            toggleText: 'Show',  
+        };  
+    }  
+    handleToggle = () => {  
+        const { isPasswordVisible } = this.state;  
+        if (isPasswordVisible) {  
+            this.setState({ isPasswordVisible: false });  
+            this.setState({ toggleText: 'Hide' });  
+        } else {  
+            this.setState({ isPasswordVisible: true });  
+            this.setState({ toggleText: 'Show' });  
+        }  
+    };  
+    render() {  
+        return (  
+            <View style={styles.container}>  
+                <TextInput  
+                    secureTextEntry={this.state.isPasswordVisible}  
+                    style={{ width: 400, height: 50, backgroundColor: '#a7a6a9', color: 'white', fontSize: 20 }}  
+                />  
+                <TouchableOpacity onPress={this.handleToggle}>  
+                    <Text  style={{fontSize: 20}}>{this.state.toggleText}</Text>  
+                </TouchableOpacity>  
+            </View>  
+        );  
+    }  
+}  
+const styles = StyleSheet.create({  
+    container: {  
+        flex: 1,  
+        justifyContent: 'center',  
+        alignItems: 'center',  
+    }  
+});  
+-----------------------------------------------------------------------------------------------------------------------------------------
+Example-4
+---------------------------
+ import React, { Component } from 'react';  
+import {  
+  Platform,  
+  StyleSheet,  
+  Image,  
+  Text,  
+  View  
+} from 'react-native';  
+  
+  
+export default class App extends Component<{}> {  
+  render() {  
+    let imagePath = { uri: 'https://facebook.github.io/react-native/img/header_logo.png'};  
+    return (  
+        <View style={styles.container}>  
+          <Text style={styles.welcome}>Welcome to React Native!</Text>  
+          <Image source={imagePath} style={{width: 250, height: 250}} />  
+        </View>  
+    );  
+  }  
+}  
+  
+const styles = StyleSheet.create({  
+  container: {  
+    flex: 1,  
+    justifyContent: 'center',  
+    alignItems: 'center',  
+    backgroundColor: '#a7a6a9',  
+  },  
+  welcome: {  
+    fontSize: 30,  
+    textAlign: 'center',  
+    margin: 20,  
+  }  
+});  
+--------------------------------------------------------------------------------------------
+Example-5
+----------------------
+import React, { Component } from 'react';  
+import { StyleSheet, Text, View } from 'react-native';  
+  
+class ChildClass extends Component {  
+  render() {  
+    return (  
+        <View style={{alignItems: 'center'}}>  
+          <Text style={styles.welcome}>Hello {this.props.name}!</Text>  
+        </View>  
+    );  
+  }  
+}  
+  
+export default class ParentsClass extends Component {  
+  render() {  
+    return (  
+        <View style={{alignItems: 'center'}}>  
+          <ChildClass name='Ashu' />  
+          <ChildClass name='Aman' />  
+          <ChildClass name='Max' />  
+        </View>  
+    );  
+  }  
+}  
+const styles = StyleSheet.create({  
+   welcome: {  
+    fontSize: 30,  
+  }  
+});  
+  
+--------------------------------------------------------------------------------------------------------------------------
+Example-6
+--------------------------
+import React, { Component } from 'react';  
+import { AppRegistry, StyleSheet, Text, View } from 'react-native';  
+  
+export default class ImplementingStyle extends Component {  
+    render() {  
+        return (  
+            <View>  
+                <Text style={{ backgroundColor: '#a7a6a9', color: 'yellow', fontSize: 20 }}>this is inline style</Text>  
+                <Text style={styles.green}>just green</Text>  
+                <Text style={styles.biggray}>just biggray</Text>  
+                <Text style={[styles.biggray, styles.green]}>biggray, then green</Text>  
+                <Text style={[styles.green, styles.biggray]}>green, then biggray</Text>  
+            </View>  
+        );  
+    }  
+}  
+const styles = StyleSheet.create({  
+    biggray: {  
+        color: 'gray',  
+        fontWeight: 'bold',  
+        fontSize: 30,  
+    },  
+    green: {  
+        color: 'green',  
+    },  
+});  
+-------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+Example-7
+---------------------
+import React, { Component } from 'react';  
+import { StyleSheet, View } from 'react-native';  
+  
+export default class HeightWidth extends Component {  
+    render() {  
+        return (  
+            <View>  
+                <View style={styles.powderblue} />  
+                <View style={styles.skyblue} />  
+                <View style={styles.steelblue} />  
+            </View>  
+        );  
+    }  
+}  
+const styles = StyleSheet.create({  
+    powderblue:{  
+        width: 100, height: 100, backgroundColor: 'powderblue'  
+    },  
+    skyblue:{  
+        width: 200, height: 200, backgroundColor: 'skyblue'  
+    },  
+    steelblue:{  
+        height: 300, backgroundColor: 'steelblue'  
+    },  
+})  
+----------------------------------------------------------------------------
+Example-9
+-----------------
+ import React, { Component } from 'react';  
+import { StyleSheet, View } from 'react-native';  
+  
+export default class HeightWidth extends Component {  
+    render() {  
+        return (  
+            <View style={styles.container}>  
+                <View style={styles.powderblue} />  
+                <View style={styles.skyblue} />  
+                <View style={styles.steelblue} />  
+            </View>  
+        );  
+    }  
+}  
+const styles = StyleSheet.create({  
+    container:{  
+      flex:1  
+    },  
+    powderblue:{  
+        flex:1,  
+        backgroundColor: 'powderblue',  
+    },  
+    skyblue:{  
+        flex:2,  
+        backgroundColor: 'skyblue',  
+    },  
+    steelblue:{  
+        flex:3,  
+        backgroundColor: 'steelblue',  
+    },  
+})  
+---------------------------------------------------------------------------------------------------------
+Example-10
+--------------------------
+import React, { Component } from 'react';  
+import { Alert, AppRegistry, Button, StyleSheet, View } from 'react-native';  
+  
+export default class ButtonBasics extends Component {  
+    onPressButton() {  
+        Alert.alert('You clicked the button!')  
+    }  
+  
+    render() {  
+        return (  
+            <View style={styles.container}>  
+                <View style={styles.buttonContainer}>  
+                    <Button  
+                        onPress={this.onPressButton}  
+                        title="Press Me"  
+                    />  
+                </View>  
+                <View style={styles.buttonContainer}>  
+                    <Button  
+                        onPress={this.onPressButton}  
+                        title="Press Me"  
+                        color="#009933"  
+                    />  
+                </View>  
+                <View style={styles.multiButtonContainer}>  
+                    <Button  
+                        onPress={this.onPressButton}  
+                        title="A disabled button"  
+                        disabled={true}  
+                    />  
+                    <Button  
+                        onPress={this.onPressButton}  
+                        title="OK!"  
+                        color="#009933"  
+                    />  
+                </View>  
+            </View>  
+        );  
+    }  
+}  
+  
+const styles = StyleSheet.create({  
+    container: {  
+        flex: 1,  
+        justifyContent: 'center',  
+    },  
+    buttonContainer: {  
+        margin: 20  
+    },  
+    multiButtonContainer: {  
+        margin: 20,  
+        flexDirection: 'row',  
+        justifyContent: 'space-between'  
+    }  
+})  
+-------------------------------------------------------------------------------
+Example-11
+---------------------
+import React, { Component } from 'react';  
+import { StyleSheet,View } from 'react-native';  
+  
+export default class FlexDirectionBasics extends Component {  
+    render() {  
+        return (  
+            <View style={styles.container}>  
+                <View style={styles.powderblue} />  
+                <View style={styles.skyblue} />  
+                <View style={styles.steelblue} />  
+            </View>  
+        );  
+    }  
+}  
+const styles = StyleSheet.create({  
+    container:{  
+        flex: 1,  
+        flexDirection: 'row',// set elements horizontally, try column.  
+    },  
+    powderblue:{  
+        width: 60,  
+        height: 60,  
+        backgroundColor: 'powderblue',  
+    },  
+    skyblue:{  
+        width: 60,  
+        height: 60,  
+        backgroundColor: 'skyblue',  
+    },  
+    steelblue:{  
+        width: 60,  
+        height: 60,  
+        backgroundColor: 'steelblue',  
+    }  
+})  
+-------------------------------------------------------------------------------------------------------
+Example-12
+----------------------
+import React, { Component } from 'react';  
+import { StyleSheet,View } from 'react-native';  
+  
+export default class JustifyContentBasics extends Component {  
+    render() {  
+        return (  
+            <View style={styles.container}>  
+                <View style={styles.powderblue} />  
+                <View style={styles.skyblue} />  
+                <View style={styles.steelblue} />  
+            </View>  
+        );  
+    }  
+}  
+const styles = StyleSheet.create({  
+    container:{  
+        flex: 1,  
+        flexDirection: 'column', // set elements horizontally`.  
+        justifyContent: 'center',  
+  
+    },  
+    powderblue:{  
+        width: 60,  
+        height: 60,  
+        backgroundColor: 'powderblue'  
+    },  
+    skyblue:{  
+        width: 60,  
+        height: 60,  
+        backgroundColor: 'skyblue',  
+    },  
+    steelblue:{  
+        width: 60,  
+        height: 60,  
+        backgroundColor: 'steelblue',  
+    }  
+})  
+------------------------------------------------------------------------
+Example-13
+--------------------------
+import React, { Component } from 'react';  
+import { StyleSheet,View } from 'react-native';  
+  
+export default class AlignItemsBasics extends Component {  
+    render() {  
+        return (  
+            <View style={styles.container}>  
+                <View style={styles.powderblue} />  
+                <View style={styles.skyblue} />  
+                <View style={styles.steelblue} />  
+            </View>  
+        );  
+    }  
+}  
+const styles = StyleSheet.create({  
+    container:{  
+        flex: 1,  
+        flexDirection: 'column', // set elements horizontally`.  
+        justifyContent: 'center',  
+        alignItems: 'stretch',  
+    },  
+    powderblue:{  
+        width: 60,  
+        height: 60,  
+        backgroundColor: 'powderblue'  
+    },  
+    skyblue:{  
+        width: 60,  
+        height: 60,  
+        backgroundColor: 'skyblue',  
+    },  
+    steelblue:{  
+        /*width: 60,*/  
+        height: 60,  
+        backgroundColor: 'steelblue',  
+    }  
+})  
+-----------------------------------------------------------------------------------------------
+Example-14
+------------------------
+import React, { Component } from "react";  
+import { StyleSheet, TextInput, View , Button } from "react-native";  
+  
+export default class App extends Component {  
+    state = {  
+        placeName: "",  
+        places: []  
+    };  
+  
+    placeNameChangedHandler = val => {  
+        this.setState({  
+            placeName: val  
+        });  
+    };  
+  
+    placeSubmitHandler = () => {  
+        alert("button clicked")  
+    };  
+  
+    render() {  
+        return (  
+            <View style={styles.container}>  
+                <TextInput  
+                        placeholder="An awesome place"  
+                        onChangeText={this.placeNameChangedHandler}  
+                        style={styles.placeInput}  
+                />  
+                <Button  
+                        title="Button"  
+                        onPress={this.placeSubmitHandler}  
+                />  
+            </View>  
+        );  
+    }  
+}  
+  
+const styles = StyleSheet.create({  
+    container: {  
+        flex: 1,  
+        padding: 26,  
+        backgroundColor: "#fff",  
+        justifyContent: "flex-start"  
+    }  
+});  
+--------------------------------------------------------------------------------------
+Example-15
+-------------------------
+import React, {Component} from 'react';  
+import {Platform, StyleSheet, Text, View, Animated} from 'react-native';  
+  
+export default class App extends Component {  
+    state={  
+        progressStatus: 0,  
+    }  
+    anim = new Animated.Value(0);  
+    componentDidMount(){  
+        this.onAnimate();  
+    }  
+    onAnimate = () =>{  
+        this.anim.addListener(({value})=> {  
+            this.setState({progressStatus: parseInt(value,10)});  
+        });  
+        Animated.timing(this.anim,{  
+             toValue: 100,  
+             duration: 50000,  
+        }).start();  
+    }  
+  render() {  
+    return (  
+      <View style={styles.container}>  
+            <Animated.View  
+                style={[  
+                    styles.inner,{width: this.state.progressStatus +"%"},  
+                ]}  
+            />  
+            <Animated.Text style={styles.label}>  
+                    {this.state.progressStatus }%  
+            </Animated.Text>  
+      </View>  
+    );  
+  }  
+}  
+const styles = StyleSheet.create({  
+    container: {  
+    width: "100%",  
+    height: 40,  
+    padding: 3,  
+    borderColor: "#FAA",  
+    borderWidth: 3,  
+    borderRadius: 30,  
+    marginTop: 200,  
+    justifyContent: "center",  
+  },  
+  inner:{  
+    width: "100%",  
+    height: 30,  
+    borderRadius: 15,  
+    backgroundColor:"green",  
+  },  
+  label:{  
+    fontSize:23,  
+    color: "black",  
+    position: "absolute",  
+    zIndex: 1,  
+    alignSelf: "center",  
+  }  
+});  
+----------------------------------------------------------------------------------------
+Example-16
+----------------------
+import React, { Component } from 'react';  
+import { Platform, StyleSheet, View, Text, TouchableOpacity, ProgressBarAndroid, ProgressViewIOS } from 'react-native';  
+export default class MyApp extends Component<{}>{  
+  constructor()  {  
+    super();  
+    this.state = {  
+      progressStatus: 0,  
+    }  
+  }  
+  
+  start_Progress = () => {  
+    this.value = setInterval( () => {  
+      if(this.state.progressStatus <= 1){  
+        this.setState({progressStatus: this.state.progressStatus+ .01})  
+      }  
+    }, 100 );  
+  }  
+  
+  stop_Progress = () =>{  
+   clearInterval(this.value);  
+  }  
+  
+  clear_Progress =()=>{  
+    this.setState({progressStatus : 0.0})  
+  }  
+  
+  render()  
+  {  
+    return(  
+      <View style = { styles.MainContainer }>  
+        <Text style = {{fontSize: 20, color: '#000'}}> Progress Value: { parseFloat((this.state.progressStatus * 100).toFixed(3))} %</Text>{  
+            ( Platform.OS === 'android' )  
+            ?  
+              ( <ProgressBarAndroid styleAttr = "Horizontal" progress = { this.state.progressStatus } indeterminate = { false } /> )  
+            :  
+              ( <ProgressViewIOS progress = { this.state.progressStatus } /> )  
+        }  
+        <TouchableOpacity activeOpacity = { 1 } style = { styles.button } onPress = { this.start_Progress }>  
+          <Text style = { styles.TextStyle }> Start Progress </Text>  
+        </TouchableOpacity>  
+        <TouchableOpacity activeOpacity = { 1 } style = { styles.button } onPress = { this.stop_Progress }>  
+          <Text style = { styles.TextStyle }> Stop Progress </Text>  
+        </TouchableOpacity>  
+        <TouchableOpacity activeOpacity = { 1 } style = { styles.button } onPress = { this.clear_Progress }>  
+          <Text style = { styles.TextStyle }> Reset Progress </Text>  
+        </TouchableOpacity>  
+      </View>  
+    );  
+  }  
+}  
+  
+const styles = StyleSheet.create(  
+{  
+  MainContainer:  
+  {  
+    flex: 1,  
+    justifyContent: 'center',  
+    paddingTop: ( Platform.OS === 'ios' ) ? 20 : 0,  
+    margin: 20  
+  },  
+  
+  button: {  
+  width: '100%',  
+  backgroundColor: '#00BCD4',  
+  borderRadius:5,  
+  padding: 10,  
+  marginTop: 10,  
+  
+},  
+  
+TextStyle:{  
+    color:'#fff',  
+    textAlign:'center',  
+    fontWeight: 'bold',  
+}  
+});  
+-----------------------------------------------------------------------------------------
+index.js (React+springboot)
+---------------------------------------------------------------
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom'
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import App41 from './App4'; 
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <BrowserRouter>
+  <App41/>
+  </BrowserRouter>
+);
+
+reportWebVitals();
+
+---------------------------------------------------------------------------------
+index.js(Shopping cart)
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom'
+import './index.css';
+import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ShoppingIndex from './shopping-spa/shopping-index';
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <ShoppingIndex />
+  </React.StrictMode>
+);
+reportWebVitals();
+-------------------------------------------------------------------------------------------------------------
